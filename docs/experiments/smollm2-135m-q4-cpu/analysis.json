@@ -1,0 +1,108 @@
+{
+  "kind": "derived_analysis_of_existing_measurements",
+  "source_report": "report.json",
+  "source_report_sha256": "bcd713498c1c6dc24e140bbc7251060af984c7b9e6958087dea3e6faf45968bb",
+  "new_benchmark_executed": false,
+  "aggregate_effects": {
+    "request_latency_ratio": 2.1596026303794096,
+    "request_latency_saved_ms": 280.3453,
+    "request_latency_reduction_percent": 53.69518512651954,
+    "first_token_latency_ratio": 2.6609048581413783,
+    "decode_throughput_ratio": 2.016383836374136,
+    "sampled_rss_increase_mib": 1.68359375,
+    "sampled_rss_increase_percent": 0.867220668423907
+  },
+  "per_prompt": [
+    {
+      "prompt_id": "explanation",
+      "settings": {
+        "1": {
+          "prompt_tokens": 32,
+          "output_tokens": 38,
+          "request_latency_median_ms": 875.4633,
+          "request_latency_p95_ms": 900.4375799999999,
+          "time_to_first_token_median_ms": 238.3133,
+          "time_to_first_token_p95_ms": 242.9437,
+          "decode_tokens_per_second": 59.2156594627136,
+          "overall_tokens_per_second": 43.190810704928815,
+          "requests": 5,
+          "generated_tokens": 190
+        },
+        "4": {
+          "prompt_tokens": 32,
+          "output_tokens": 38,
+          "request_latency_median_ms": 408.7253,
+          "request_latency_p95_ms": 427.39202,
+          "time_to_first_token_median_ms": 89.5181,
+          "time_to_first_token_p95_ms": 98.2438,
+          "decode_tokens_per_second": 119.30464609050605,
+          "overall_tokens_per_second": 93.05393058088622,
+          "requests": 5,
+          "generated_tokens": 190
+        }
+      },
+      "request_latency_ratio": 2.1419356717090916
+    },
+    {
+      "prompt_id": "arithmetic",
+      "settings": {
+        "1": {
+          "prompt_tokens": 34,
+          "output_tokens": 9,
+          "request_latency_median_ms": 407.57959999999997,
+          "request_latency_p95_ms": 461.9792,
+          "time_to_first_token_median_ms": 256.2691,
+          "time_to_first_token_p95_ms": 304.17823999999996,
+          "decode_tokens_per_second": 58.94148171812061,
+          "overall_tokens_per_second": 21.485563420226683,
+          "requests": 5,
+          "generated_tokens": 45
+        },
+        "4": {
+          "prompt_tokens": 34,
+          "output_tokens": 9,
+          "request_latency_median_ms": 176.12820000000002,
+          "request_latency_p95_ms": 196.51084,
+          "time_to_first_token_median_ms": 97.3267,
+          "time_to_first_token_p95_ms": 117.15917999999999,
+          "decode_tokens_per_second": 116.56648748454765,
+          "overall_tokens_per_second": 50.909204452043866,
+          "requests": 5,
+          "generated_tokens": 45
+        }
+      },
+      "request_latency_ratio": 2.3141075648306173
+    },
+    {
+      "prompt_id": "list",
+      "settings": {
+        "1": {
+          "prompt_tokens": 28,
+          "output_tokens": 18,
+          "request_latency_median_ms": 522.1051,
+          "request_latency_p95_ms": 541.84318,
+          "time_to_first_token_median_ms": 209.9891,
+          "time_to_first_token_p95_ms": 217.50744,
+          "decode_tokens_per_second": 57.85452024853757,
+          "overall_tokens_per_second": 34.51862757465334,
+          "requests": 5,
+          "generated_tokens": 90
+        },
+        "4": {
+          "prompt_tokens": 28,
+          "output_tokens": 18,
+          "request_latency_median_ms": 241.75979999999998,
+          "request_latency_p95_ms": 251.31465999999998,
+          "time_to_first_token_median_ms": 88.5497,
+          "time_to_first_token_p95_ms": 97.7406,
+          "decode_tokens_per_second": 117.92694966544818,
+          "overall_tokens_per_second": 75.67988920464221,
+          "requests": 5,
+          "generated_tokens": 90
+        }
+      },
+      "request_latency_ratio": 2.1596026303794096
+    }
+  ],
+  "interpretation": "The four-thread setting is a candidate for paired repeatability and workload-scaling checks. These calculations add no independent trials or task-quality labels."
+}

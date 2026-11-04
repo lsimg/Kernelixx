@@ -642,10 +642,16 @@ are not evidence of a successful remote workflow.
 
 ## Future improvements
 
-Independent interleaved benchmark trials and confidence intervals; torchao/ONNX
-static INT8 with representative calibration; ORT CUDA with I/O binding and a
-backend-independent GPU memory instrument; compiler-evidence extraction for
-fusion; richer task-specific validation adapters and portable model artifacts.
+The next GGUF checks follow the [validation milestones](docs/GGUF_VALIDATION_PLAN.md):
+paired repeatability first, then thread/workload mapping and labeled content/format
+checks, followed by memory instrumentation, matched precision variants, native
+integration CI and a verified GPU track. Each milestone states its question,
+protocol and the decision its evidence supports. The [current per-prompt analysis](docs/GGUF_SMOLLM2.md#engineering-assessment)
+explains why the four-thread setting is the candidate for these follow-ups.
+
+PyTorch follow-ups include torchao/ONNX static INT8 with representative calibration,
+ORT CUDA with I/O binding and an explicit GPU memory instrument, compiler evidence
+for fusion, task-specific validation adapters and portable model artifacts.
 
 ## Technical references
 

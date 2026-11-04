@@ -2,6 +2,8 @@
 
 ## Unreleased — GGUF CPU text-model benchmark, 2026-11-04
 
+- Added a per-prompt analysis derived from the preserved measurements, a Russian
+  explanation and prioritized validation milestones with protocols/decision criteria.
 - Added `gguf-benchmark` with optional llama-cpp-python/psutil dependencies and fresh
   native CPU worker processes for each thread setting.
 - Added GGUF header/SHA-256 metadata, explicit ChatML/raw prompts, greedy prefix-reset

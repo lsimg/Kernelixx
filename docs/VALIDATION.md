@@ -1,7 +1,7 @@
 # Local validation evidence
 
-**Update, 2026-11-04:** Kernelixx has **90 tests**, including the optional GGUF CPU extension,
-including GPU inference, AMP training, real-image preparation, accuracy-limit checks,
+**Update, 2026-11-04:** Kernelixx has **90 tests**, covering the optional GGUF CPU extension,
+GPU inference, AMP training, real-image preparation, accuracy-limit checks,
 batch-equivalence probes and repeated-study aggregation/read mode.
 See [GPU validation](GPU_VALIDATION.md) and the
 [pretrained real-image experiment](REAL_IMAGE_VALIDATION.md) for current evidence.
@@ -19,6 +19,9 @@ The [user-image follow-up](USER_IMAGES.md) records real top-5 inference on seven
 explicitly supplied screenshots and explains the ImageNet class-vocabulary limit.
 The [GGUF SmolLM2 experiment](GGUF_SMOLLM2.md) records CPU thread comparisons,
 first-token/decode timing, sampled process RSS and matching greedy token outputs.
+Its [per-prompt assessment](GGUF_SMOLLM2.md#engineering-assessment) and
+[next validation milestones](GGUF_VALIDATION_PLAN.md) connect the measured result
+to planned repeatability, workload, quality and resource studies.
 The [release checks](RELEASE_VALIDATION.md) verify an isolated CPU installation,
 installed-wheel commands outside the checkout, source-archive tests and distribution inventories.
 The [Kernelixx publication checks](PUBLICATION.md) cover the renamed package,
