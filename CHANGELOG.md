@@ -1,5 +1,22 @@
 # Changelog
 
+## Unreleased — GGUF CPU text-model benchmark, 2026-11-04
+
+- Added `gguf-benchmark` with optional llama-cpp-python/psutil dependencies and fresh
+  native CPU worker processes for each thread setting.
+- Added GGUF header/SHA-256 metadata, explicit ChatML/raw prompts, greedy prefix-reset
+  generation, warmup and full repeated request/token records.
+- Added first-token and request latency, decode/overall tokens per second, sampled
+  process RSS, exact token agreement and comparison of matching output workloads.
+- Extended the existing JSON/Markdown/CSV pipeline and `compare` reader for GGUF reports.
+- Executed the supplied SmolLM2 Q4_K_M file on 1/4 CPU threads and retained actual
+  responses, raw measurements, negative/unsupported scope and model hash.
+- Added 16 focused tests; the full local suite now has 90 tests. Optional GGUF runtime
+  is not required by the PyTorch-only installation or the standard CI matrix.
+
+See [the measured experiment](docs/GGUF_SMOLLM2.md). Gemma/Ollama and GPU GGUF
+remain outside this delivered backend.
+
 ## 0.1.0 — first public Kernelixx release, 2026-11-04
 
 ### Delivered

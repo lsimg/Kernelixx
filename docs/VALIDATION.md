@@ -1,6 +1,6 @@
 # Local validation evidence
 
-**Update, 2026-11-04:** The renamed Kernelixx project passes all **74 tests** with CUDA available,
+**Update, 2026-11-04:** Kernelixx has **90 tests**, including the optional GGUF CPU extension,
 including GPU inference, AMP training, real-image preparation, accuracy-limit checks,
 batch-equivalence probes and repeated-study aggregation/read mode.
 See [GPU validation](GPU_VALIDATION.md) and the
@@ -17,6 +17,8 @@ The [cross-model comparison](MODEL_COMPARISON.md) finds 30 corrected mistakes an
 six new mistakes for ResNet50, with exact source-photo/label matching.
 The [user-image follow-up](USER_IMAGES.md) records real top-5 inference on seven
 explicitly supplied screenshots and explains the ImageNet class-vocabulary limit.
+The [GGUF SmolLM2 experiment](GGUF_SMOLLM2.md) records CPU thread comparisons,
+first-token/decode timing, sampled process RSS and matching greedy token outputs.
 The [release checks](RELEASE_VALIDATION.md) verify an isolated CPU installation,
 installed-wheel commands outside the checkout, source-archive tests and distribution inventories.
 The [Kernelixx publication checks](PUBLICATION.md) cover the renamed package,

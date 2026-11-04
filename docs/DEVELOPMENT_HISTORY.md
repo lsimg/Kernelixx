@@ -3,7 +3,7 @@
 This document records the actual local development sequence before the first
 public repository import on 2026-11-04. It is a development narrative backed by
 the linked reports, not a reconstructed series of Git commits. Early experiment
-counts describe their historical revisions; the current suite has 74 tests.
+counts describe their historical revisions; the current suite has 90 tests.
 
 ## Phase 1 — Core infrastructure
 
@@ -172,9 +172,22 @@ metric numbers are not recomputed or changed. Original local `results/` artifact
 are retained. Source/distribution audits exclude raw images, model weights,
 private data and virtual environments. Revalidation is in [PUBLICATION.md](PUBLICATION.md).
 
+## Follow-up 7 — Supplied GGUF text model
+
+Added a separate native CPU backend for a user-supplied SmolLM2-135M-Instruct Q4_K_M
+file, with optional dependencies, isolated worker processes, full raw token outputs,
+first-token/decode timing and sampled process RSS. Compared one versus four CPU
+threads on fixed English prompts, with warmup and five repetitions each.
+
+Median request latency fell from 522.105 to 241.760 ms; all generated token ids and
+stop reasons agreed. Decode throughput rose from 58.801 to 118.565 tokens/s while
+sampled working set rose slightly. These are native execution-setting observations,
+not savings caused by quantization or proof of answer quality. No FP32 reference,
+PyTorch transformations or GPU execution were involved. See [GGUF evidence](GGUF_SMOLLM2.md).
+
 ## Discussed extensions, not implemented
 
-Gemma and Ollama were investigated as possible text-model experiments. Current
-input/output contracts, metrics and optimization backends do not implement LLM
-generation, KV-cache accounting, first-token latency or an Ollama adapter. These
-remain explicit future work and are not listed as delivered capabilities.
+Gemma and Ollama were investigated as possible text-model experiments. The GGUF
+CPU runner adds a limited native text benchmark, but does not implement an Ollama
+adapter, Gemma-specific formatting, GPU GGUF, exact KV-cache allocation accounting
+or logit-level LLM correctness validation. These remain explicit future work.

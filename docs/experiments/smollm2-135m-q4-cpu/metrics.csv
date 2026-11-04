@@ -1,0 +1,3 @@
+method,threads,status,request_latency_median_ms,request_latency_p95_ms,time_to_first_token_median_ms,time_to_first_token_p95_ms,decode_tokens_per_second,overall_tokens_per_second,requests,generated_tokens,sampled_process_rss_peak_bytes,process_rss_before_load_bytes,peak_gpu_memory_bytes,comparable,request_latency_speedup,decode_throughput_ratio,token_validation_passed,reason
+threads-1,1,ok,522.1051,892.08228,238.3133,277.51383999999996,58.801044427944746,35.71114077931642,15,325,203567104,41537536,,True,1.0,1.0,True,
+threads-4,4,ok,241.75979999999998,418.97907,89.561,111.22512999999998,118.56547554642525,78.97986591794725,15,325,205332480,41406464,,True,2.1596026303794096,2.016383836374136,True,

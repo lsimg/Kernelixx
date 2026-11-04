@@ -74,10 +74,28 @@ def parser() -> argparse.ArgumentParser:
     training.add_argument("--batch-size", type=int, default=16)
     training.add_argument("--output", type=Path, default=Path("results"))
     training.add_argument("--json", action="store_true")
+    gguf = commands.add_parser("gguf-benchmark", help="Measure a local GGUF on CPU using llama-cpp-python")
+    gguf.add_argument("--model-file", required=True, type=Path)
+    gguf.add_argument("--threads", nargs="+", type=int, default=[1, 4])
+    gguf.add_argument("--context", type=int, default=512)
+    gguf.add_argument("--max-tokens", type=int, default=64)
+    gguf.add_argument("--warmup", type=int, default=1)
+    gguf.add_argument("--repeats", type=int, default=5)
+    gguf.add_argument("--seed", type=int, default=42)
+    gguf.add_argument("--prompt-format", choices=("chatml", "raw"), default="chatml")
+    gguf.add_argument("--prompt-file", type=Path, help="JSON list of {id, text} prompts; built-in English prompts by default")
+    gguf.add_argument("--timeout-seconds", type=int, default=600, help="Timeout for each isolated CPU configuration")
+    gguf.add_argument("--output", type=Path, default=Path("results/gguf"))
+    gguf.add_argument("--json", action="store_true")
     return root
 
 
 def display(report: dict[str, Any], console: Console) -> None:
+    if report["experiment"] == "gguf":
+        from kernelixx.llm.reporting import display as gguf_display
+
+        gguf_display(report, console)
+        return
     table = Table(title="Kernelixx - actual measurements")
     for title in ("Method", "Status", "Median ms", "p95 ms", "Samples/s", "Speedup"):
         table.add_column(title, no_wrap=title in {"Method", "Status"})
@@ -151,7 +169,16 @@ def main(argv: list[str] | None = None) -> None:
             report = load_report(args.run_dir)
         else:
             directory = create_run_directory(args.output)
-            if args.command == "train-benchmark":
+            if args.command == "gguf-benchmark":
+                from kernelixx.llm.gguf import GGUFConfig, run_gguf
+
+                config = GGUFConfig(model_file=str(args.model_file.resolve()), threads=tuple(args.threads),
+                                    context=args.context, max_tokens=args.max_tokens, warmup=args.warmup,
+                                    repeats=args.repeats, seed=args.seed, prompt_format=args.prompt_format,
+                                    prompt_file=str(args.prompt_file.resolve()) if args.prompt_file else None,
+                                    timeout_seconds=args.timeout_seconds)
+                report = run_gguf(config, directory)
+            elif args.command == "train-benchmark":
                 report = training_experiment(args.device, args.seed, args.threads,
                                              args.steps, args.warmup, args.batch_size)
             else:
@@ -174,6 +201,8 @@ def main(argv: list[str] | None = None) -> None:
         if args.command == "optimize" and report["candidates"][0]["status"] != "ok":
             raise SystemExit(2)
         if args.command == "train-benchmark" and any(run["status"] == "failed" for run in report["runs"]):
+            raise SystemExit(2)
+        if args.command == "gguf-benchmark" and any(run["status"] == "failed" for run in report["runs"]):
             raise SystemExit(2)
     except KeyboardInterrupt:
         console = Console(stderr=True)

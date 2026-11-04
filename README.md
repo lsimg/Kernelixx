@@ -7,7 +7,7 @@
 [Changelog](CHANGELOG.md) · [Measured evidence](docs/VALIDATION.md)
 
 A Python CLI for profiling, transforming, validating, and benchmarking existing
-PyTorch models. Kernelixx measures each candidate against the unmodified model
+PyTorch models, with a separate optional native GGUF CPU benchmark. Kernelixx measures each PyTorch candidate against the unmodified model
 and retains the baseline when no validated candidate improves the chosen metric.
 There is no web server, GUI, or hosted service.
 
@@ -51,6 +51,7 @@ failure handling are described in [ARCHITECTURE.md](docs/ARCHITECTURE.md).
 | 11. Inspectable predictions | Every photo paired with its answer | 30 ResNet50 fixes, six regressions, complete result tables |
 | 12. User images | Explicit image paths, top-5 predictions, static reports | Seven apple screenshots; class-vocabulary limits documented |
 | 13. Public release | Kernelixx rename, consistent imports/CLI, publication docs | Revalidated tests and rebuilt distributions |
+| 14. GGUF text models | Native CPU runner, thread comparison, first-token/decode timing and sampled RSS | Supplied SmolLM2 Q4_K_M; exact token agreement; raw responses retained |
 
 See [DEVELOPMENT_HISTORY.md](docs/DEVELOPMENT_HISTORY.md) for the reasons behind
 each change, what failed, and which observations support the results. Gemma and
@@ -81,6 +82,8 @@ slower candidates remain visible in the report.
 - Elementwise numerical validation, class agreement, and optional labeled-dataset accuracy.
 - Real warmup/repeated timings, median, p95, synchronized CUDA, and raw latency samples.
 - A separate, limited small-CNN FP32 versus AMP training experiment.
+- Optional local GGUF CPU execution with llama-cpp-python, isolated thread settings,
+  first-token/request timing, decode throughput and explicit sampled process RSS.
 
 ## Technical architecture
 
@@ -101,6 +104,8 @@ kernelixx/
   reporting/reporter.py      JSON, Markdown, CSV, latest report copies
   training/benchmark.py      isolated small CNN training comparison
   utils/device.py           CPU fallback, seeds, versions, synchronization
+  llm/gguf.py               isolated native GGUF CPU execution and token agreement
+  llm/reporting.py          GGUF-specific metrics, tables and Markdown
 tests/                      unit and real backend integration tests
 examples/                   custom model and synthetic NPZ examples
 results/                    generated local experiment artifacts (gitignored)
@@ -180,7 +185,7 @@ python -m kernelixx compare --run-dir results/latest
 python -m kernelixx train-benchmark --device cuda --steps 20 --batch-size 16
 ```
 
-All inference commands share `--input-shape`, `--seed`, `--threads`, `--warmup`,
+The PyTorch inference commands share `--input-shape`, `--seed`, `--threads`, `--warmup`,
 `--repeats`, `--validation-batches`, `--weights`, `--dataset`, `--atol`, `--rtol`,
 `--max-accuracy-drop`, `--task`, `--min-improvement`, `--objective`, `--output`, and `--json`.
 Run a subcommand with `--help` for defaults. `--json` emits a complete structured
@@ -219,6 +224,49 @@ v1 scope; the tool never substitutes a CPU result into a GPU speedup.
 Every compilation candidate records `fusion_confirmed: false` because this version
 does not parse compiler fusion evidence. No custom CUDA compiler is implemented.
 
+## Local GGUF text-model benchmark
+
+The `gguf-benchmark` command is a separate **CPU-only native backend**. It runs an
+existing GGUF file and compares execution settings. It does not apply PyTorch
+transformations, re-quantize the file or infer savings relative to missing FP32 weights.
+
+On Windows without a C++ compiler, install the documented prebuilt CPU wheel first:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install --only-binary=:all: --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu "llama-cpp-python>=0.3.36,<0.4" "psutil>=5.9"
+.\.venv\Scripts\python.exe -m pip install -e ".[gguf]"
+.\.venv\Scripts\python.exe -m kernelixx gguf-benchmark --model-file "C:\Models\SmolLM2-135M-Instruct.Q4_K_M.gguf" --threads 1 4 --repeats 5 --output results/smollm2-gguf-cpu
+.\.venv\Scripts\python.exe -m kernelixx compare --run-dir results/smollm2-gguf-cpu/latest
+```
+
+Replace the model path with an existing file. Model files are not included in Git.
+Default inputs are three fixed English prompts; `--prompt-file` accepts a JSON list
+of `{ "id": "unique-name", "text": "your prompt" }` objects. ChatML formatting is
+explicitly checked against model metadata. Other templates require `--prompt-format raw`
+with fully formatted text; this version does not universally render arbitrary chat templates.
+Raw prompts must include any required beginning-of-sequence token; none is added implicitly.
+
+Each thread setting starts in a fresh process, with CPU model/KV execution, fixed
+context, zero-temperature greedy sampling, warmup and repeated requests. The evaluated
+prefix is reset before every request. Tokenization, file loading and detokenization
+are outside timing. TTFT is to the first non-EOS token; decode throughput counts the
+`N-1` intervals between non-EOS output tokens. Full token ids, text, stop reason and
+per-request measurements are in JSON. Existing `compare` reads GGUF reports too.
+
+RSS is sampled every 10 ms for the isolated worker, including Python/native runtime,
+file mapping, loading, warmup and requests. On Windows it is a working-set observation,
+not an exact allocation peak or GPU/model-only memory. It is separate from PyTorch's
+unmeasured CPU peak and cannot win the PyTorch memory objective. Speedup ratios are
+withheld when reference repeats or candidate greedy outputs disagree.
+
+The [executed SmolLM2 experiment](docs/GGUF_SMOLLM2.md) measured 522.105 versus
+241.760 ms median request latency (1 versus 4 threads), with identical token outputs.
+These are one-session descriptive results on three prompts, not task accuracy,
+general model quality or evidence of quantization savings.
+
+References: [llama-cpp-python CPU installation](https://llama-cpp-python.readthedocs.io/en/latest/)
+and [SmolLM2 model card](https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct).
+
 ## Benchmarking methodology
 
 1. Seed Python, NumPy and PyTorch; disable TF32 and cuDNN autotuning, request
@@ -245,7 +293,7 @@ peak inference memory.
 model and inputs resident, including the inference output. It excludes CUDA context,
 non-PyTorch allocations, reserved allocator cache and other processes. Resident
 memory before execution and transient allocation delta are reported separately.
-CPU peak memory is `null`: process RSS and Python tracemalloc would not give a
+PyTorch CPU peak memory is `null`: process RSS and Python tracemalloc would not give a
 comparable isolated tensor-allocation metric. Memory objectives do not silently
 substitute weight size when peak memory is unavailable.
 
@@ -451,7 +499,7 @@ See [local validation evidence](docs/VALIDATION.md) and the
 [GPU follow-up](docs/GPU_VALIDATION.md), plus the
 [pretrained real-image experiment](docs/REAL_IMAGE_VALIDATION.md), for executed checks, measured results and
 remaining compiler limitations. CUDA FP16 inference and AMP training have been
-executed on an RTX 4060 Laptop GPU; the full suite has **74 passing tests**,
+executed on an RTX 4060 Laptop GPU; the full suite has **90 passing tests**,
 including photo-to-prediction mapping, cross-model comparisons, user image files and report generation.
 Rejection of an FP16 candidate remains a valid result when it exceeds the
 requested numerical tolerances; GPU support alone does not guarantee acceptance.
@@ -546,11 +594,13 @@ and a separate cross-batch numerical check.
 - ONNX is CPU-only, opset 17, single Tensor input/output; some operators cannot export.
 - Inductor can fail after initial platform checks; errors are captured. No kernel
   fusion is asserted without evidence, and no compiler logs are synthesized.
-- No CPU peak-memory measurement, energy/cost meter, training optimizer for arbitrary
+- No PyTorch CPU allocation-peak measurement, energy/cost meter, training optimizer for arbitrary
   networks or universal model support. The included downloader is specifically for
   the documented Imagenette experiment, rather than an arbitrary dataset service.
-- Text generation, Gemma and Ollama backends are future work. The current custom
-  model contract requires one floating input/output Tensor; it is not an LLM adapter.
+- GGUF text generation is an optional CPU benchmark with its own metrics and token
+  policy. Gemma-specific support, Ollama, GPU GGUF and logit-level LLM comparison
+  remain future work. The PyTorch custom-model contract still requires one floating
+  input/output Tensor and does not load GGUF files.
 - Reports describe the tested workload. They do not establish superiority over
   existing optimization tools, production accuracy, or statistically significant gains.
 
@@ -584,7 +634,7 @@ To install a wheel after choosing the CPU or CUDA PyTorch pair:
 The [historical release validation](docs/RELEASE_VALIDATION.md) records an isolated Python 3.12
 CPU installation, nine installed-wheel checks from outside the checkout, and
 59 passing source-distribution tests with three CUDA-only skips. The existing
-CUDA development suite now has 74 passing tests. The renamed release is checked
+CUDA development suite now has 90 passing tests. The renamed release is checked
 again as described in [PUBLICATION.md](docs/PUBLICATION.md). The CI matrix builds
 and checks the installed wheel on Windows/Linux with Python 3.11/3.12. Remote
 workflow status can be inspected in the repository's Actions tab; local results

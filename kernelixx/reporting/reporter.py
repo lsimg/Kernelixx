@@ -16,6 +16,10 @@ def create_run_directory(root: Path) -> Path:
 
 
 def rows(report: dict[str, Any]) -> list[dict[str, Any]]:
+    if report["experiment"] == "gguf":
+        from kernelixx.llm.reporting import rows as gguf_rows
+
+        return gguf_rows(report)
     records = []
     if report["experiment"] == "training":
         for run in report["runs"]:
@@ -42,6 +46,10 @@ def rows(report: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 def markdown(report: dict[str, Any]) -> str:
+    if report["experiment"] == "gguf":
+        from kernelixx.llm.reporting import markdown as gguf_markdown
+
+        return gguf_markdown(report)
     lines = ["# Kernelixx measured experiment", "", f"Experiment: {report['experiment']}", "",
              "## Environment", "", "```json", json.dumps(report["hardware"], indent=2), "```", "",
              "## Configuration", "", "```json", json.dumps(report["config"], indent=2), "```", ""]
@@ -101,6 +109,6 @@ def save_report(report: dict[str, Any], directory: Path, root: Path) -> Path:
 def load_report(directory: Path) -> dict[str, Any]:
     with (directory / "report.json").open(encoding="utf-8") as source:
         report = json.load(source)
-    if report.get("schema_version") != 1 or report.get("experiment") not in {"inference", "training"}:
+    if report.get("schema_version") != 1 or report.get("experiment") not in {"inference", "training", "gguf"}:
         raise ValueError("Unsupported Kernelixx report schema")
     return report

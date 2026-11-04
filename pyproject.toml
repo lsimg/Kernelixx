@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "kernelixx"
 version = "0.1.0"
-description = "Measured, validated PyTorch inference optimization from the terminal"
+description = "Validated PyTorch optimization and measured GGUF CPU benchmarks from the terminal"
 readme = "README.md"
 requires-python = ">=3.11"
 license = "MIT"
@@ -19,6 +19,7 @@ Issues = "https://github.com/lsimg/Kernelixx/issues"
 
 [project.optional-dependencies]
 onnx = ["onnx>=1.16", "onnxruntime>=1.18"]
+gguf = ["llama-cpp-python>=0.3.36,<0.4", "psutil>=5.9"]
 dev = ["pytest>=8", "build>=1.2"]
 
 [project.scripts]

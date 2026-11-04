@@ -26,6 +26,8 @@ Kernelixx/
     reporting/reporter.py   original run directories, latest copies, reports
     training/benchmark.py   limited small-CNN FP32/AMP experiment
     utils/device.py         devices, seeds, synchronization and environment
+    llm/gguf.py             optional isolated native CPU text-model experiments
+    llm/reporting.py        separate GGUF metrics, terminal and report rendering
   examples/
     prepare_imagenette.py   selected real-image dataset with manifest/hashes
     make_dataset.py         synthetic labeled NPZ contract example
@@ -118,7 +120,7 @@ Weight tensor bytes, serialized artifact bytes and inference peak allocations
 are different measurements. CUDA peak is `torch.cuda.max_memory_allocated` for
 the target model and inputs, including outputs. It excludes CUDA context, reserved
 allocator cache and other processes. Resident and transient values are separate.
-CPU peak is not measured; no RSS or weight-size proxy silently replaces it.
+PyTorch CPU peak is not measured; no RSS or weight-size proxy silently replaces it.
 
 ## Correctness and selection
 
@@ -154,3 +156,31 @@ the baseline; inspect `selection.improved` rather than treating exit 0 as speedu
 Raw datasets, checkpoints, environments and private images remain local under
 ignored directories. Public evidence copies normalize machine-specific paths
 and branding; numerical values and recorded metric meanings remain unchanged.
+
+## Optional GGUF CPU boundary
+
+`gguf-benchmark` uses optional llama-cpp-python/psutil dependencies without changing
+the PyTorch runner contract. The parent validates the GGUF header/hash and prompt
+configuration. Each requested CPU thread count runs in a fresh native worker,
+with `n_gpu_layers=0`, CPU K/V operations and explicit thread counts for generation
+and prompt processing. No HTTP server or hosted service is started.
+
+ChatML formatting is explicit and checked against the GGUF's declared template;
+other models require fully formatted raw prompts. The model's evaluated prefix is
+reset before each warmup/timed request. Greedy generation yields token ids, allowing
+timing to the first non-EOS token and each subsequent token. Tokenization, loading
+and detokenization stay outside measured requests. EOS processing is included in
+request latency but not counted as output text. Decode tokens/s uses N-1 output-token
+intervals; zero/one-token responses have no decode-rate measurement.
+
+The report stores every request, token sequence and answer. Reference repeats and
+candidate outputs are compared by prompt ids, input/output token ids and stop reason;
+speedup is omitted when agreement fails. This is not floating-logit validation or
+task accuracy. No savings relative to an absent unquantized baseline are inferred.
+
+A 10 ms sampler observes the isolated process RSS through load, warmup and requests.
+It includes the process/runtime and file mapping, can miss transient peaks and is
+not comparable to the PyTorch CUDA allocator metric. GGUF reports use experiment
+type `gguf` under schema 1; the common saver writes JSON/Markdown/CSV and `compare`
+dispatches to the matching report renderer. Failed/timed-out native workers remain
+visible and cause `gguf-benchmark` to exit 2 after report saving.

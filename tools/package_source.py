@@ -11,11 +11,11 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 ROOT_FILES = {"README.md", "README.ru.md", "CHANGELOG.md", "CONTRIBUTING.md", "LICENSE", "pyproject.toml", "MANIFEST.in", ".gitignore", ".gitattributes",
-              "requirements-tested-cpu.txt", "requirements-tested-cuda.txt"}
+              "requirements-tested-cpu.txt", "requirements-tested-cuda.txt", "requirements-tested-gguf.txt"}
 DIRECTORIES = {"kernelixx": {".py"}, "examples": {".py"}, "tests": {".py"}, "tools": {".py"},
                "docs": {".md", ".json", ".csv", ".txt"}, ".github": {".yml", ".yaml"}}
 FORBIDDEN_PARTS = {".venv", "results", "build", "dist", ".git", "__pycache__", ".pytest_cache"}
-FORBIDDEN_SUFFIXES = {".pth", ".pt", ".onnx", ".npz", ".npy", ".pkl", ".jpg", ".jpeg", ".png",
+FORBIDDEN_SUFFIXES = {".pth", ".pt", ".onnx", ".gguf", ".npz", ".npy", ".pkl", ".jpg", ".jpeg", ".png",
                       ".dll", ".pyd", ".pyc", ".pyo"}
 
 

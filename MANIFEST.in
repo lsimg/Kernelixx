@@ -2,6 +2,7 @@ include README.md LICENSE pyproject.toml MANIFEST.in .gitignore
 include README.ru.md CHANGELOG.md CONTRIBUTING.md
 include .gitattributes
 include requirements-tested-cpu.txt requirements-tested-cuda.txt
+include requirements-tested-gguf.txt
 recursive-include kernelixx *.py
 recursive-include examples *.py
 recursive-include tests *.py
