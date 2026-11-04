@@ -1,0 +1,1 @@
+"""Supported model loading contract."""

@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kernelixx"
+version = "0.1.0"
+description = "Measured, validated PyTorch inference optimization from the terminal"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+dependencies = ["torch>=2.9,<2.10", "torchvision>=0.24,<0.25", "numpy>=1.26", "rich>=13"]
+
+[project.urls]
+Repository = "https://github.com/lsimg/Kernelixx"
+Documentation = "https://github.com/lsimg/Kernelixx#readme"
+Issues = "https://github.com/lsimg/Kernelixx/issues"
+
+[project.optional-dependencies]
+onnx = ["onnx>=1.16", "onnxruntime>=1.18"]
+dev = ["pytest>=8", "build>=1.2"]
+
+[project.scripts]
+kernelixx = "kernelixx.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["kernelixx*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

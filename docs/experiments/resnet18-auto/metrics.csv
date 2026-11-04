@@ -1,0 +1,11 @@
+method,status,device,backend,precision,batch_size,input_dtype,latency_median_ms,latency_p95_ms,throughput_samples_per_sec,peak_gpu_memory_bytes,gpu_resident_before_inference_bytes,gpu_transient_bytes,weight_bytes,serialized_model_bytes,cpu_peak_memory_bytes,comparable,speedup,memory_reduction_percent,weight_reduction_percent,validation_passed,maximum_absolute_error,mean_absolute_error,maximum_relative_error,class_agreement,baseline_accuracy,optimized_accuracy,reason
+
+baseline,ok,cpu,pytorch,fp32,1,torch.float32,75.76495,87.29494,12.884539068499365,,,,46796608,46835019,,,,,,,,,,,,,
+
+onnx,ok,cpu,onnxruntime/cpu,fp32,1,torch.float32,38.177350000000004,40.047705,26.05666508213191,,,,46723488,46733674,,True,1.9845523589248597,,0.15625064107210873,True,2.2649765014648438e-06,3.7022649000088375e-07,0.0022524124522844205,1.0,,,
+
+quantization,rejected,cpu,pytorch,int8-dynamic-linear,1,torch.float32,75.3749,79.75864999999999,13.166027068386144,,,,45260620,45299847,,True,1.0051747995685567,,3.2822635349980867,False,0.03981423377990723,0.0078093475780139365,206.78282002039026,0.3333333333333333,,,
+
+compile,skipped,,,,,,,,,,,,,,,,,,,,,,,,,,Inductor CPU on Windows requires an available MSVC C++ toolchain (cl.exe)
+
+fp16,skipped,,,,,,,,,,,,,,,,,,,,,,,,,,FP16 inference requires CUDA; CPU FP16 is deliberately unsupported

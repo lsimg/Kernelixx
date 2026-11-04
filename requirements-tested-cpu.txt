@@ -1,0 +1,9 @@
+# Tested Windows CPU direct-dependency snapshot; see README for installation.
+# Install with --extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.9.1+cpu
+torchvision==0.24.1+cpu
+numpy==2.2.6
+rich==14.2.0
+onnx==1.23.2
+onnxruntime==1.31.1
+pytest==9.1.1

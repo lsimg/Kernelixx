@@ -1,0 +1,15 @@
+include README.md LICENSE pyproject.toml MANIFEST.in .gitignore
+include README.ru.md CHANGELOG.md CONTRIBUTING.md
+include .gitattributes
+include requirements-tested-cpu.txt requirements-tested-cuda.txt
+recursive-include kernelixx *.py
+recursive-include examples *.py
+recursive-include tests *.py
+recursive-include tools *.py
+recursive-include docs *.md *.json *.csv *.txt
+recursive-include .github *.yml
+prune .venv
+prune results
+prune build
+prune dist
+global-exclude __pycache__ *.py[cod]

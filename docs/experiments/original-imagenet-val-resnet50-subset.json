@@ -1,0 +1,1278 @@
+{
+  "dataset": "Imagenette",
+  "split": "imagenet-val",
+  "source_splits": [
+    "train",
+    "val"
+  ],
+  "eligible_images": 500,
+  "image_size_variant": "160px",
+  "source": "https://github.com/fastai/imagenette",
+  "archive_url": "https://s3.amazonaws.com/fast-ai-imageclas/imagenette2-160.tgz",
+  "archive_expected_md5": "e793b78cc4c9e9a4ccc0c1155377a412",
+  "archive_integrity_note": "torchvision verifies MD5 on download; an existing extracted tree is not re-verified.",
+  "model": "resnet50",
+  "weights": "ResNet50_Weights.IMAGENET1K_V2",
+  "preprocessing": "ImageClassification(\n    crop_size=[224]\n    resize_size=[232]\n    mean=[0.485, 0.456, 0.406]\n    std=[0.229, 0.224, 0.225]\n    interpolation=InterpolationMode.BILINEAR\n)",
+  "samples": 200,
+  "samples_per_class": 20,
+  "seed": 42,
+  "target_space": "Original ImageNet-1K class indices; argmax remains over all 1000 outputs.",
+  "selection": "Seeded, without replacement, class-balanced; no prediction-based filtering.",
+  "filename_filter": "ILSVRC2012_val_*.JPEG",
+  "pretraining_overlap_note": "Only original ImageNet validation filenames selected.",
+  "class_mapping": {
+    "n01440764": {
+      "name": "tench",
+      "imagenet_target": 0
+    },
+    "n02102040": {
+      "name": "English springer",
+      "imagenet_target": 217
+    },
+    "n02979186": {
+      "name": "cassette player",
+      "imagenet_target": 482
+    },
+    "n03000684": {
+      "name": "chain saw",
+      "imagenet_target": 491
+    },
+    "n03028079": {
+      "name": "church",
+      "imagenet_target": 497
+    },
+    "n03394916": {
+      "name": "French horn",
+      "imagenet_target": 566
+    },
+    "n03417042": {
+      "name": "garbage truck",
+      "imagenet_target": 569
+    },
+    "n03425413": {
+      "name": "gas pump",
+      "imagenet_target": 571
+    },
+    "n03445777": {
+      "name": "golf ball",
+      "imagenet_target": 574
+    },
+    "n03888257": {
+      "name": "parachute",
+      "imagenet_target": 701
+    }
+  },
+  "input_shape": [
+    200,
+    3,
+    224,
+    224
+  ],
+  "inputs_dtype": "float32",
+  "labels_dtype": "int64",
+  "npz_sha256": "cb7a0aeeb81ac1bb1a962cb421151e7b6fa3b701c5c56d78519c49f43bc62b3e",
+  "manifest": [
+    {
+      "path": "val/n03425413/ILSVRC2012_val_00035211.JPEG",
+      "sha256": "81ce8de7166ebda46f0fccad12e821fdd8ee0c4b5e4612c2477a63b03e425162",
+      "wnid": "n03425413",
+      "imagenet_target": 571
+    },
+    {
+      "path": "train/n03394916/ILSVRC2012_val_00048303.JPEG",
+      "sha256": "380e98bc9a609032469ad09cc98fcbf64d1d3fcb1bb1269b4822488b55c1a96a",
+      "wnid": "n03394916",
+      "imagenet_target": 566
+    },
+    {
+      "path": "train/n02979186/ILSVRC2012_val_00017463.JPEG",
+      "sha256": "c07c3e2fd2ab89c5b40a89ad1fcff61a495c827a7df61c8ddc79166d8eb0a393",
+      "wnid": "n02979186",
+      "imagenet_target": 482
+    },
+    {
+      "path": "train/n01440764/ILSVRC2012_val_00037834.JPEG",
+      "sha256": "f4b1c11acd604c1d9a9a26c6d66eb08d698a8b98a824d2e21a4aefd3c1775e4d",
+      "wnid": "n01440764",
+      "imagenet_target": 0
+    },
+    {
+      "path": "train/n03445777/ILSVRC2012_val_00011983.JPEG",
+      "sha256": "5f8a7319bc26e1cabda83734ed69b3d390c48745188ef3ffd215329bbe6e844f",
+      "wnid": "n03445777",
+      "imagenet_target": 574
+    },
+    {
+      "path": "train/n01440764/ILSVRC2012_val_00028158.JPEG",
+      "sha256": "5887f288c6ff6931a8e8d5db861ad46c0508947a42c601f54f1f63309e482c9c",
+      "wnid": "n01440764",
+      "imagenet_target": 0
+    },
+    {
+      "path": "train/n03394916/ILSVRC2012_val_00003759.JPEG",
+      "sha256": "46d9aa2ed1534adda9b91ef37f087e84fe23501189e142b677b1a28f8059fe62",
+      "wnid": "n03394916",
+      "imagenet_target": 566
+    },
+    {
+      "path": "train/n03417042/ILSVRC2012_val_00012925.JPEG",
+      "sha256": "90569103108534748f7c7428e0b3fd274a0b5b3b7efa8e41a807549d633c5760",
+      "wnid": "n03417042",
+      "imagenet_target": 569
+    },
+    {
+      "path": "train/n03028079/ILSVRC2012_val_00004939.JPEG",
+      "sha256": "9310311f2b04acf87d4d47fce2ce350f706e76c663e099599d38e2654d3f9d2c",
+      "wnid": "n03028079",
+      "imagenet_target": 497
+    },
+    {
+      "path": "train/n02102040/ILSVRC2012_val_00002294.JPEG",
+      "sha256": "3b34bebe2f6c6af035b15b8adfde3303f0902bb5acbc6bdace2a624f3bad31cd",
+      "wnid": "n02102040",
+      "imagenet_target": 217
+    },
+    {
+      "path": "train/n03417042/ILSVRC2012_val_00046913.JPEG",
+      "sha256": "4f718c178e90b53d40193b06e76548d92f5fbd55012e1a1bb26dbd06a408fd69",
+      "wnid": "n03417042",
+      "imagenet_target": 569
+    },
+    {
+      "path": "train/n03425413/ILSVRC2012_val_00017866.JPEG",
+      "sha256": "72349b0679ff6cc9577d8241354ecda0d97630de3edf98472469d5780acd0049",
+      "wnid": "n03425413",
+      "imagenet_target": 571
+    },
+    {
+      "path": "val/n03028079/ILSVRC2012_val_00016542.JPEG",
+      "sha256": "7a077c3f3af23a4b5c74572407b314fb615a9aa6d413c535b4cf557c1c66c167",
+      "wnid": "n03028079",
+      "imagenet_target": 497
+    },
+    {
+      "path": "train/n03445777/ILSVRC2012_val_00036755.JPEG",
+      "sha256": "64331edf639587bf6bc223765b74d0744b8cc57c86fa7ab4f6872c0a1ef11c91",
+      "wnid": "n03445777",
+      "imagenet_target": 574
+    },
+    {
+      "path": "train/n03394916/ILSVRC2012_val_00034826.JPEG",
+      "sha256": "873bc91821ca2dc1cbb9ff1ddeb7c2e99494c5712c2ba0d4255d2e30f0d1987e",
+      "wnid": "n03394916",
+      "imagenet_target": 566
+    },
+    {
+      "path": "train/n03888257/ILSVRC2012_val_00041925.JPEG",
+      "sha256": "29c7e541ccc576e8a828571e5fce978a9e1bd19d1c84216a927bafd520c98296",
+      "wnid": "n03888257",
+      "imagenet_target": 701
+    },
+    {
+      "path": "val/n03417042/ILSVRC2012_val_00022172.JPEG",
+      "sha256": "9069b06273739fa8aa7e40bdfc5e51f6f13b878210fd0ad5cc6729f6e792fd81",
+      "wnid": "n03417042",
+      "imagenet_target": 569
+    },
+    {
+      "path": "train/n03417042/ILSVRC2012_val_00013827.JPEG",
+      "sha256": "73cad158c0b1d2b95c3aa370723b96bd55122f362dae656b18ba0c81f1c1b0a1",
+      "wnid": "n03417042",
+      "imagenet_target": 569
+    },
+    {
+      "path": "train/n03417042/ILSVRC2012_val_00005094.JPEG",
+      "sha256": "a619d10a04aaeee8e8a655844e2d07388604cca004f827d909701d31aa8bd8d7",
+      "wnid": "n03417042",
+      "imagenet_target": 569
+    },
+    {
+      "path": "val/n03028079/ILSVRC2012_val_00019331.JPEG",
+      "sha256": "92247541b68d41eebbe6fb6b5b76ff90917bffdb64e38acbb52b24c83aaf9d57",
+      "wnid": "n03028079",
+      "imagenet_target": 497
+    },
+    {
+      "path": "val/n03425413/ILSVRC2012_val_00007471.JPEG",
+      "sha256": "ac7fe8cda7a508ccd52825f0382cfee1b2e18afe32b03ad5f81721f15b61aeb4",
+      "wnid": "n03425413",
+      "imagenet_target": 571
+    },
+    {
+      "path": "val/n03445777/ILSVRC2012_val_00011581.JPEG",
+      "sha256": "70f31d2c648393cd790486b6cf4e6a87c76f6b499b896e61e1661a4340392756",
+      "wnid": "n03445777",
+      "imagenet_target": 574
+    },
+    {
+      "path": "train/n03417042/ILSVRC2012_val_00018227.JPEG",
+      "sha256": "fe832d2058c1284b4e4d710d51f1c40070fa1add5233130e29d882e25b32a4d5",
+      "wnid": "n03417042",
+      "imagenet_target": 569
+    },
+    {
+      "path": "train/n03888257/ILSVRC2012_val_00002665.JPEG",
+      "sha256": "e4287a7d5b4af226b6b95c6eecf198a47a5755b39c1df7343581f1ebf0f211e4",
+      "wnid": "n03888257",
+      "imagenet_target": 701
+    },
+    {
+      "path": "train/n02102040/ILSVRC2012_val_00010994.JPEG",
+      "sha256": "62e097d06b16347986a486672fbf19d3b2dd591519a2ef26d8c79fc86c52ebf8",
+      "wnid": "n02102040",
+      "imagenet_target": 217
+    },
+    {
+      "path": "train/n03445777/ILSVRC2012_val_00007755.JPEG",
+      "sha256": "dc4dad80c4bcc5ed67ec49e6caf6243f78f5b6719f9f208e808618d378a37b52",
+      "wnid": "n03445777",
+      "imagenet_target": 574
+    },
+    {
+      "path": "val/n03445777/ILSVRC2012_val_00038790.JPEG",
+      "sha256": "35acadef6c83806671dd3cabf86d549bc93a15d441facb44f6168c5713c38221",
+      "wnid": "n03445777",
+      "imagenet_target": 574
+    },
+    {
+      "path": "train/n03425413/ILSVRC2012_val_00024806.JPEG",
+      "sha256": "0887e76830b30b905ed7be5cb37f999ab595179cc45194e8e935a7dcce4d00d5",
+      "wnid": "n03425413",
+      "imagenet_target": 571
+    },
+    {
+      "path": "train/n02979186/ILSVRC2012_val_00007226.JPEG",
+      "sha256": "fdecca8387ee71abcff225db521791450085a978989ee5da6f2b8a98f2c885c9",
+      "wnid": "n02979186",
+      "imagenet_target": 482
+    },
+    {
+      "path": "train/n03445777/ILSVRC2012_val_00003793.JPEG",
+      "sha256": "868d04d80820befdc6b3efd5dcff2dde881e0bad1e4c1f06a1ac7fc354635ba5",
+      "wnid": "n03445777",
+      "imagenet_target": 574
+    },
+    {
+      "path": "train/n02979186/ILSVRC2012_val_00005866.JPEG",
+      "sha256": "0398fb09f1b750dbd79cb678d4bd8d75f98d48c0b99fabf57174a3c9e7032840",
+      "wnid": "n02979186",
+      "imagenet_target": 482
+    },
+    {
+      "path": "train/n02102040/ILSVRC2012_val_00015694.JPEG",
+      "sha256": "dade05bee57b1a1269dbcffb449295a2cc775cdb4d3a5b487a53741363aa4b5c",
+      "wnid": "n02102040",
+      "imagenet_target": 217
+    },
+    {
+      "path": "train/n03394916/ILSVRC2012_val_00046669.JPEG",
+      "sha256": "0e0216c2fb04d7431d144bce1752d71b68d6947d3524bff392f4620ef97f5954",
+      "wnid": "n03394916",
+      "imagenet_target": 566
+    },
+    {
+      "path": "train/n03000684/ILSVRC2012_val_00044793.JPEG",
+      "sha256": "640a99016d821f2b74cc81ce028daa029ab4fb58fe85eb10d0dc3c09303cfe10",
+      "wnid": "n03000684",
+      "imagenet_target": 491
+    },
+    {
+      "path": "val/n03394916/ILSVRC2012_val_00025761.JPEG",
+      "sha256": "6b1e662f2a83e9205a4d3e351d6fa878dfc5d8ffff0061f8841a4b08e329187a",
+      "wnid": "n03394916",
+      "imagenet_target": 566
+    },
+    {
+      "path": "val/n03028079/ILSVRC2012_val_00034021.JPEG",
+      "sha256": "cbe9107c8ff032b4ef676f8daddb732aaf86daeb675b9f67d860d0c032a985a8",
+      "wnid": "n03028079",
+      "imagenet_target": 497
+    },
+    {
+      "path": "train/n03445777/ILSVRC2012_val_00043745.JPEG",
+      "sha256": "49d7f8282f110c77130d116ec8619912127541332839c0079245ba84e75d9352",
+      "wnid": "n03445777",
+      "imagenet_target": 574
+    },
+    {
+      "path": "val/n02979186/ILSVRC2012_val_00035160.JPEG",
+      "sha256": "420554fd3033371fd9a95904c69fcf8487d841b100cbb7606c639c913b55679b",
+      "wnid": "n02979186",
+      "imagenet_target": 482
+    },
+    {
+      "path": "train/n02102040/ILSVRC2012_val_00040679.JPEG",
+      "sha256": "c9ec6b70f07769297791b7490500218d2ddcd079fbf6d6275f26ff7624c034e5",
+      "wnid": "n02102040",
+      "imagenet_target": 217
+    },
+    {
+      "path": "train/n03425413/ILSVRC2012_val_00005183.JPEG",
+      "sha256": "8962dbd207d7f4fdbe154236b2e2e9acd55a40408e76e9e034432406195f7987",
+      "wnid": "n03425413",
+      "imagenet_target": 571
+    },
+    {
+      "path": "train/n02979186/ILSVRC2012_val_00033657.JPEG",
+      "sha256": "83fd24a21a044ac8645c5aeb7b6ad9d061712c6ba10b521b9fe75015a859b221",
+      "wnid": "n02979186",
+      "imagenet_target": 482
+    },
+    {
+      "path": "train/n03000684/ILSVRC2012_val_00037629.JPEG",
+      "sha256": "f702a45ee529cac1b656a866f6f6e2f271916e3adbfa54177a432505011eaf3d",
+      "wnid": "n03000684",
+      "imagenet_target": 491
+    },
+    {
+      "path": "train/n03000684/ILSVRC2012_val_00043196.JPEG",
+      "sha256": "3875d77738f577f49b923bbbe8d4e8ff05fd98712cfdc6aa50286691e5374985",
+      "wnid": "n03000684",
+      "imagenet_target": 491
+    },
+    {
+      "path": "train/n02979186/ILSVRC2012_val_00046953.JPEG",
+      "sha256": "1ae8e9d48257e1fd15b83356e61ac4a9a6e8cdd4a40fa6064646a69e64261fa2",
+      "wnid": "n02979186",
+      "imagenet_target": 482
+    },
+    {
+      "path": "val/n03028079/ILSVRC2012_val_00046232.JPEG",
+      "sha256": "ea13a0ac59eec9f7ce4c1fce902efe030108c738e647277c015b1b74c041bead",
+      "wnid": "n03028079",
+      "imagenet_target": 497
+    },
+    {
+      "path": "train/n03888257/ILSVRC2012_val_00022496.JPEG",
+      "sha256": "7393d3d33f561820b4a037961a42d4edfeec1fc0e299893d7a1116cb345a1091",
+      "wnid": "n03888257",
+      "imagenet_target": 701
+    },
+    {
+      "path": "train/n03000684/ILSVRC2012_val_00006578.JPEG",
+      "sha256": "ef62a00c0a72e2e65e771bc52ba0c7ce00f54615668ae045c297f9213795a0c9",
+      "wnid": "n03000684",
+      "imagenet_target": 491
+    },
+    {
+      "path": "val/n03394916/ILSVRC2012_val_00003620.JPEG",
+      "sha256": "e7a74afb1d3fb0cebd9c7b8b30dc2c68a928589827a9133addd12b1925654734",
+      "wnid": "n03394916",
+      "imagenet_target": 566
+    },
+    {
+      "path": "train/n03417042/ILSVRC2012_val_00025416.JPEG",
+      "sha256": "8a0fd9cccf76936b6f1e123348c082a7404e3bde610a74ee045b7f0bef45f0c9",
+      "wnid": "n03417042",
+      "imagenet_target": 569
+    },
+    {
+      "path": "val/n02102040/ILSVRC2012_val_00027182.JPEG",
+      "sha256": "4bce76d46f9c9f0024e8b50dea101ba00ebd3d4300bfff20f08f9b1ffbd7831f",
+      "wnid": "n02102040",
+      "imagenet_target": 217
+    },
+    {
+      "path": "val/n03425413/ILSVRC2012_val_00009821.JPEG",
+      "sha256": "0b4e082e4e0ab571711e0cde54d44c8b54edfbc21a195d30ccff2a39b312a91b",
+      "wnid": "n03425413",
+      "imagenet_target": 571
+    },
+    {
+      "path": "train/n02979186/ILSVRC2012_val_00027673.JPEG",
+      "sha256": "ea5453d7d83167c7d9e663968c3d040bd85aa9917146caac2176fbf643a78e6b",
+      "wnid": "n02979186",
+      "imagenet_target": 482
+    },
+    {
+      "path": "train/n03028079/ILSVRC2012_val_00031446.JPEG",
+      "sha256": "8ee6ec307034403932aa70e0ea3bd4a47b12d787add31daadd48cd48a8ac303e",
+      "wnid": "n03028079",
+      "imagenet_target": 497
+    },
+    {
+      "path": "train/n02979186/ILSVRC2012_val_00047315.JPEG",
+      "sha256": "5914892db3a67cb27ed60c9472bea5e5e69c1a90616b580be8394349ec8e33a7",
+      "wnid": "n02979186",
+      "imagenet_target": 482
+    },
+    {
+      "path": "val/n03425413/ILSVRC2012_val_00004452.JPEG",
+      "sha256": "9d1cf191a103a36c151514fc3f7630f914d99924b913d588caf132de0df59110",
+      "wnid": "n03425413",
+      "imagenet_target": 571
+    },
+    {
+      "path": "train/n02102040/ILSVRC2012_val_00046295.JPEG",
+      "sha256": "642566bd49a28905fbf620dfa1d22199058ad75a87f712afa1befcecf4633bd6",
+      "wnid": "n02102040",
+      "imagenet_target": 217
+    },
+    {
+      "path": "train/n02979186/ILSVRC2012_val_00031964.JPEG",
+      "sha256": "5be1550d8599817f52758d77d4f0f159bedfdf54be7af8f489b7993cfd20f7ea",
+      "wnid": "n02979186",
+      "imagenet_target": 482
+    },
+    {
+      "path": "train/n03028079/ILSVRC2012_val_00006268.JPEG",
+      "sha256": "e5d62ab3aa20497c8cdd2e98144e151ddc921b9a687369da9755fcf241b42b59",
+      "wnid": "n03028079",
+      "imagenet_target": 497
+    },
+    {
+      "path": "train/n03394916/ILSVRC2012_val_00017407.JPEG",
+      "sha256": "14420185e84c46e73115278954b5e8f5fcd18026eb3ec50eb6b3b0484974e808",
+      "wnid": "n03394916",
+      "imagenet_target": 566
+    },
+    {
+      "path": "val/n03000684/ILSVRC2012_val_00011951.JPEG",
+      "sha256": "95de732c9e2a03d1ac5d1b82f8965ab900c964eb673431ab8f5fbf5df0d68d2f",
+      "wnid": "n03000684",
+      "imagenet_target": 491
+    },
+    {
+      "path": "train/n03000684/ILSVRC2012_val_00026946.JPEG",
+      "sha256": "46489dfc1178d6105ca08ac189bda84f365d344a21fe9c6d1a909f8bb36e8b86",
+      "wnid": "n03000684",
+      "imagenet_target": 491
+    },
+    {
+      "path": "train/n03445777/ILSVRC2012_val_00036187.JPEG",
+      "sha256": "b55edeee5f1198b4b163c44d5be2393c58005b2fc637be0751ea5adc9210eb4c",
+      "wnid": "n03445777",
+      "imagenet_target": 574
+    },
+    {
+      "path": "train/n03425413/ILSVRC2012_val_00031186.JPEG",
+      "sha256": "8112df7a0c6c86e2d9a2a3c254497bf4b69f75ad3d0fa3b8ac5597a20806556c",
+      "wnid": "n03425413",
+      "imagenet_target": 571
+    },
+    {
+      "path": "train/n03394916/ILSVRC2012_val_00022204.JPEG",
+      "sha256": "857c6fe62f12305fdc345dfe501efa6a6034f9faf5d673fb2e8deeb989cd8ac0",
+      "wnid": "n03394916",
+      "imagenet_target": 566
+    },
+    {
+      "path": "train/n03028079/ILSVRC2012_val_00029728.JPEG",
+      "sha256": "0fec2a48cc4cd7f1dd890b473fc57dc8e3767c67c76a0f924558065159bdbcc6",
+      "wnid": "n03028079",
+      "imagenet_target": 497
+    },
+    {
+      "path": "val/n01440764/ILSVRC2012_val_00045880.JPEG",
+      "sha256": "819f2a3f32c984d78a8c5be6658191d80943ef3cdd3d26c48c849da9a7b3f37a",
+      "wnid": "n01440764",
+      "imagenet_target": 0
+    },
+    {
+      "path": "train/n03394916/ILSVRC2012_val_00041668.JPEG",
+      "sha256": "4a93e944a777eb741713339204860a051f0e3cfc39964994ad9d9ebb82a44331",
+      "wnid": "n03394916",
+      "imagenet_target": 566
+    },
+    {
+      "path": "train/n03417042/ILSVRC2012_val_00031313.JPEG",
+      "sha256": "6454fbff217ae74981c53a1e2ace37eb751d0b445ae949419a274c8d83c42848",
+      "wnid": "n03417042",
+      "imagenet_target": 569
+    },
+    {
+      "path": "train/n03425413/ILSVRC2012_val_00037555.JPEG",
+      "sha256": "d05858cf4208934c70522e290ee593ff5e642775953570a32d783903fa7bf6f2",
+      "wnid": "n03425413",
+      "imagenet_target": 571
+    },
+    {
+      "path": "val/n03888257/ILSVRC2012_val_00014381.JPEG",
+      "sha256": "fdc6ef128a597ae2b753d4137df134f32dfbee4c76b2ad33dff0ffe505c9be43",
+      "wnid": "n03888257",
+      "imagenet_target": 701
+    },
+    {
+      "path": "val/n02979186/ILSVRC2012_val_00042482.JPEG",
+      "sha256": "27315faea066e4808ef6c50b79b9b488d123f31cdacb1de3480f65b8e8be0484",
+      "wnid": "n02979186",
+      "imagenet_target": 482
+    },
+    {
+      "path": "val/n03028079/ILSVRC2012_val_00003682.JPEG",
+      "sha256": "b8dd5b10994d71b1133c0c0ee0cd52a4a8c3304439319109f4e1a5f92b4f8d0a",
+      "wnid": "n03028079",
+      "imagenet_target": 497
+    },
+    {
+      "path": "val/n03888257/ILSVRC2012_val_00002990.JPEG",
+      "sha256": "38c30eff63e4aef3113abbe7348d0ef87ade71663d0034c536c8d46bdaa1012d",
+      "wnid": "n03888257",
+      "imagenet_target": 701
+    },
+    {
+      "path": "val/n03888257/ILSVRC2012_val_00006561.JPEG",
+      "sha256": "bc387d760d262d52bcba51a000ae182928d6be2abf17861b7b845e74e6bad4f6",
+      "wnid": "n03888257",
+      "imagenet_target": 701
+    },
+    {
+      "path": "train/n02102040/ILSVRC2012_val_00029518.JPEG",
+      "sha256": "29022620e5f6ca84c4e9ae69bbbf35b5e1d26c728b357661bf7caacdcdb27424",
+      "wnid": "n02102040",
+      "imagenet_target": 217
+    },
+    {
+      "path": "train/n02102040/ILSVRC2012_val_00032959.JPEG",
+      "sha256": "126a13afc4cb211202ea2673e2844bd2be6f207eb7978046af4b659a1f790cd4",
+      "wnid": "n02102040",
+      "imagenet_target": 217
+    },
+    {
+      "path": "train/n03425413/ILSVRC2012_val_00005996.JPEG",
+      "sha256": "6b3fbcfb37950ed266d50e3ab10e40355b2399cbd03a62655de0ee1122a3eb3f",
+      "wnid": "n03425413",
+      "imagenet_target": 571
+    },
+    {
+      "path": "train/n01440764/ILSVRC2012_val_00009396.JPEG",
+      "sha256": "305a479bb21ced7c40937ad9661e5125a7ffb8950219e353dc0c3fe93d9a2274",
+      "wnid": "n01440764",
+      "imagenet_target": 0
+    },
+    {
+      "path": "train/n03394916/ILSVRC2012_val_00005548.JPEG",
+      "sha256": "e321ff14e0f88fdd29637e46038601b58f85cb4d1242c231a8f2e866dcedb66d",
+      "wnid": "n03394916",
+      "imagenet_target": 566
+    },
+    {
+      "path": "train/n03888257/ILSVRC2012_val_00007616.JPEG",
+      "sha256": "2890086791c16e4996fe0d5aa044122ee770ff0bc16a49f6424acb77a89d190d",
+      "wnid": "n03888257",
+      "imagenet_target": 701
+    },
+    {
+      "path": "train/n03888257/ILSVRC2012_val_00047705.JPEG",
+      "sha256": "71ef719ea883bc8b4540a9b44f2bb9396750a41e71f1411ccbe796111cad272b",
+      "wnid": "n03888257",
+      "imagenet_target": 701
+    },
+    {
+      "path": "train/n03417042/ILSVRC2012_val_00006234.JPEG",
+      "sha256": "07ce209b2e876af092c79982ca32e5974f4e5d208d6d92d46af68315b8f74c50",
+      "wnid": "n03417042",
+      "imagenet_target": 569
+    },
+    {
+      "path": "train/n02979186/ILSVRC2012_val_00042648.JPEG",
+      "sha256": "3bb9f46a722d16bcfb741080f5661def538922b815c89e915d51c78b8422f5e4",
+      "wnid": "n02979186",
+      "imagenet_target": 482
+    },
+    {
+      "path": "train/n03000684/ILSVRC2012_val_00041057.JPEG",
+      "sha256": "9bca83ea80327d146192f91fc393757391758bd5da09f46939659b2cd59dec24",
+      "wnid": "n03000684",
+      "imagenet_target": 491
+    },
+    {
+      "path": "train/n03417042/ILSVRC2012_val_00047374.JPEG",
+      "sha256": "a16533afa95b1164351ccac185a398c592e56fe773df79d48e2d30809d05a54c",
+      "wnid": "n03417042",
+      "imagenet_target": 569
+    },
+    {
+      "path": "train/n03425413/ILSVRC2012_val_00033364.JPEG",
+      "sha256": "b7753dc6334eaf977c6c6f2d091a27f0ab4862fe6a452af2dfdff2406ad133fd",
+      "wnid": "n03425413",
+      "imagenet_target": 571
+    },
+    {
+      "path": "train/n01440764/ILSVRC2012_val_00039905.JPEG",
+      "sha256": "bf87df31128e733e9c2a06a3fffdd0373f2b4814e101868239158808b551a983",
+      "wnid": "n01440764",
+      "imagenet_target": 0
+    },
+    {
+      "path": "train/n02979186/ILSVRC2012_val_00017775.JPEG",
+      "sha256": "300b60cd535b4ece6762dbfdc5b26972641d3d7ebd15bf2a994adeecd236b718",
+      "wnid": "n02979186",
+      "imagenet_target": 482
+    },
+    {
+      "path": "val/n02102040/ILSVRC2012_val_00008162.JPEG",
+      "sha256": "cf568899895caffc556cbf2cb25daa4d417d944062a2ee89564b603aa3a57c66",
+      "wnid": "n02102040",
+      "imagenet_target": 217
+    },
+    {
+      "path": "train/n03394916/ILSVRC2012_val_00048138.JPEG",
+      "sha256": "711eacb72a02a622dacdf74a8b0acf47868468915679740e0e78e9ded4a823a0",
+      "wnid": "n03394916",
+      "imagenet_target": 566
+    },
+    {
+      "path": "val/n03445777/ILSVRC2012_val_00022792.JPEG",
+      "sha256": "e729a5f6f7b2defc870c6cda428e479040b60f45343f56d9676755b8704f9a46",
+      "wnid": "n03445777",
+      "imagenet_target": 574
+    },
+    {
+      "path": "val/n02102040/ILSVRC2012_val_00023440.JPEG",
+      "sha256": "e1f1f283aa6c6dbc9137227b50bfc63eda69835d7867f012147060f520ddb6bc",
+      "wnid": "n02102040",
+      "imagenet_target": 217
+    },
+    {
+      "path": "train/n03425413/ILSVRC2012_val_00040715.JPEG",
+      "sha256": "aeb14f96aa675abee9715b50f2dbc2928b2ac5e2848db503976c0d28ae2bd02e",
+      "wnid": "n03425413",
+      "imagenet_target": 571
+    },
+    {
+      "path": "train/n03028079/ILSVRC2012_val_00042207.JPEG",
+      "sha256": "6b228280fc0fcf5e4a861a729602f179ddce19787c3c56f0fc50c7de02c15877",
+      "wnid": "n03028079",
+      "imagenet_target": 497
+    },
+    {
+      "path": "train/n02979186/ILSVRC2012_val_00035803.JPEG",
+      "sha256": "b23a914584d1ed449fb26d5e8c5b2248e87de349c781dedb817b1392bac92abc",
+      "wnid": "n02979186",
+      "imagenet_target": 482
+    },
+    {
+      "path": "train/n02979186/ILSVRC2012_val_00048478.JPEG",
+      "sha256": "d0ecbb58e23d3cfad318a0b4ac26cc4beccd5957982986efc57a967bf312e38b",
+      "wnid": "n02979186",
+      "imagenet_target": 482
+    },
+    {
+      "path": "train/n03417042/ILSVRC2012_val_00002434.JPEG",
+      "sha256": "e42e53fd4aeacc719acd1f7dd73f35e45cf73045723a85c6701127ec89e6a7b2",
+      "wnid": "n03417042",
+      "imagenet_target": 569
+    },
+    {
+      "path": "train/n03028079/ILSVRC2012_val_00024897.JPEG",
+      "sha256": "7d65f0c701562277db4de7375710e5909d7ed4cb23605fe227811ad4327338dd",
+      "wnid": "n03028079",
+      "imagenet_target": 497
+    },
+    {
+      "path": "train/n03417042/ILSVRC2012_val_00029377.JPEG",
+      "sha256": "b05a0e909cd1c0d5d1293bf699c160e663f9c24733c59c1da849a83a6830c02b",
+      "wnid": "n03417042",
+      "imagenet_target": 569
+    },
+    {
+      "path": "train/n02979186/ILSVRC2012_val_00025484.JPEG",
+      "sha256": "b28ca81d035f213ff4c905a05a3a21a94a919b054968fa03a7a8635d7a4fe8fb",
+      "wnid": "n02979186",
+      "imagenet_target": 482
+    },
+    {
+      "path": "train/n03028079/ILSVRC2012_val_00027385.JPEG",
+      "sha256": "3d14c75ad8f487a8cb579923222921a91d5d91cfbc9f98295e7145a506603893",
+      "wnid": "n03028079",
+      "imagenet_target": 497
+    },
+    {
+      "path": "train/n02979186/ILSVRC2012_val_00041893.JPEG",
+      "sha256": "10303c066f6fa791e32369a60da3a60f1ffa81a8b8c65ede8bffa2db9a7a16b2",
+      "wnid": "n02979186",
+      "imagenet_target": 482
+    },
+    {
+      "path": "val/n03394916/ILSVRC2012_val_00004301.JPEG",
+      "sha256": "b132c93b4828b558ab5b86873dd0e1d3ab71df9fe0d075185a909ccfc92818ac",
+      "wnid": "n03394916",
+      "imagenet_target": 566
+    },
+    {
+      "path": "val/n03394916/ILSVRC2012_val_00007921.JPEG",
+      "sha256": "3c01d2eb75ae6ffcdf7d407d552bce0f0875a6e8bf68f0a72848fa29c00da9cd",
+      "wnid": "n03394916",
+      "imagenet_target": 566
+    },
+    {
+      "path": "train/n03425413/ILSVRC2012_val_00035913.JPEG",
+      "sha256": "9a7c754014dac903801bdf971d7380afba5d97664baaffc36a01d4b477902984",
+      "wnid": "n03425413",
+      "imagenet_target": 571
+    },
+    {
+      "path": "train/n03417042/ILSVRC2012_val_00043909.JPEG",
+      "sha256": "f9b2cad98c7e3008ddcab10ee5296196dee9be982e33dbb9964dbd1e671c2634",
+      "wnid": "n03417042",
+      "imagenet_target": 569
+    },
+    {
+      "path": "train/n03888257/ILSVRC2012_val_00016387.JPEG",
+      "sha256": "1a657306159e0625cc69ab0cfba361bd4572ead7902e3eaa5fdc8fb4555bb20c",
+      "wnid": "n03888257",
+      "imagenet_target": 701
+    },
+    {
+      "path": "train/n02102040/ILSVRC2012_val_00018207.JPEG",
+      "sha256": "8db4b7a5c7edbacaccbe9ef6f1ff98877bc65ed27b71d0e7f586169d54066cd2",
+      "wnid": "n02102040",
+      "imagenet_target": 217
+    },
+    {
+      "path": "train/n03417042/ILSVRC2012_val_00036233.JPEG",
+      "sha256": "ea11631b947c83e219929ce21979760a1e2d3b69831928e7f5393af85f11585b",
+      "wnid": "n03417042",
+      "imagenet_target": 569
+    },
+    {
+      "path": "train/n03417042/ILSVRC2012_val_00034078.JPEG",
+      "sha256": "1f8627f97575c6abd39979c57405e7cacd212f7cf96b13002ff4bdf59b55f47e",
+      "wnid": "n03417042",
+      "imagenet_target": 569
+    },
+    {
+      "path": "val/n03394916/ILSVRC2012_val_00041242.JPEG",
+      "sha256": "ed5c8005bed6844923d518c95ca1cdd2e750c1ce5313306f13277ece44323084",
+      "wnid": "n03394916",
+      "imagenet_target": 566
+    },
+    {
+      "path": "train/n03425413/ILSVRC2012_val_00044734.JPEG",
+      "sha256": "413c8a4adfedcdc8f5a1b19a7adb96d1c4583e455d995add08adf88d4331835e",
+      "wnid": "n03425413",
+      "imagenet_target": 571
+    },
+    {
+      "path": "train/n03425413/ILSVRC2012_val_00015654.JPEG",
+      "sha256": "62e297a9e8478b504d991470a6d500a8e62a66de98ba7d24424fc52dc158d692",
+      "wnid": "n03425413",
+      "imagenet_target": 571
+    },
+    {
+      "path": "val/n03445777/ILSVRC2012_val_00009902.JPEG",
+      "sha256": "bc7a142e2a664bd834dc08f04ca621ecdccc438370ec6b69404ece9c7ee44481",
+      "wnid": "n03445777",
+      "imagenet_target": 574
+    },
+    {
+      "path": "train/n01440764/ILSVRC2012_val_00037596.JPEG",
+      "sha256": "11f5402ae81780e32945ac4642c305fdcaeeb33e79739a42b4a04d703753e9c8",
+      "wnid": "n01440764",
+      "imagenet_target": 0
+    },
+    {
+      "path": "train/n03028079/ILSVRC2012_val_00039053.JPEG",
+      "sha256": "6b2b08f400fd05e2d4fa32e7baa05eb6f8f85c891b40f307e0b243ea55ed13dc",
+      "wnid": "n03028079",
+      "imagenet_target": 497
+    },
+    {
+      "path": "train/n03445777/ILSVRC2012_val_00016748.JPEG",
+      "sha256": "2695a4922d23f92358d7d87c9637b83ed7b97ee5ff625023ffa12909aee31fa6",
+      "wnid": "n03445777",
+      "imagenet_target": 574
+    },
+    {
+      "path": "val/n03000684/ILSVRC2012_val_00029211.JPEG",
+      "sha256": "c7fda6b323a0d5b3cf20b19929b860fd9b9930f3f22ac234941ac899e9b31358",
+      "wnid": "n03000684",
+      "imagenet_target": 491
+    },
+    {
+      "path": "val/n03888257/ILSVRC2012_val_00038942.JPEG",
+      "sha256": "a8d176d9656d928295b48539bc0bb83e0655b416311cd16a6c8d8c0467ee81fb",
+      "wnid": "n03888257",
+      "imagenet_target": 701
+    },
+    {
+      "path": "train/n02102040/ILSVRC2012_val_00049523.JPEG",
+      "sha256": "552e1d6447ed852fcde1a4030ba345d1b5b692b99bd0d0cb2ab919d401f2edea",
+      "wnid": "n02102040",
+      "imagenet_target": 217
+    },
+    {
+      "path": "val/n03000684/ILSVRC2012_val_00046651.JPEG",
+      "sha256": "fea4b046cd13e342ce5d8a123de44009b287ba3b98f5739a03296d46ef291de3",
+      "wnid": "n03000684",
+      "imagenet_target": 491
+    },
+    {
+      "path": "val/n03417042/ILSVRC2012_val_00008430.JPEG",
+      "sha256": "c41c3a6af628feab8ef6be75bad8e00add1c68c02035fbb8f4ccba7ccc90bc8d",
+      "wnid": "n03417042",
+      "imagenet_target": 569
+    },
+    {
+      "path": "val/n03888257/ILSVRC2012_val_00037770.JPEG",
+      "sha256": "c888cb814d10ed09cbde0096b0cba9748000ee9893b7d56f5a1778e94d745644",
+      "wnid": "n03888257",
+      "imagenet_target": 701
+    },
+    {
+      "path": "train/n03028079/ILSVRC2012_val_00015155.JPEG",
+      "sha256": "c2cbd47e56d547c82c2238b72aef25a47699b11ac5a5a39afaa59d799de41d0c",
+      "wnid": "n03028079",
+      "imagenet_target": 497
+    },
+    {
+      "path": "train/n03425413/ILSVRC2012_val_00046178.JPEG",
+      "sha256": "aaea5816a449cf31d2340627c4b39dbaade3c9ddb5473f5bd8b1959a8f8e09a6",
+      "wnid": "n03425413",
+      "imagenet_target": 571
+    },
+    {
+      "path": "train/n01440764/ILSVRC2012_val_00040358.JPEG",
+      "sha256": "d0efcdbc4215d492358d3b281ac0ce24fd4cbc957536809cfd74a81b8ee0e8ab",
+      "wnid": "n01440764",
+      "imagenet_target": 0
+    },
+    {
+      "path": "train/n03445777/ILSVRC2012_val_00044936.JPEG",
+      "sha256": "acc8fdb1cb445394d7caeab673ee5a144e3945e0e14944d3b52fe899d4db941d",
+      "wnid": "n03445777",
+      "imagenet_target": 574
+    },
+    {
+      "path": "val/n02979186/ILSVRC2012_val_00045110.JPEG",
+      "sha256": "20f0e8938ad9dd8514f32d255c981cc6d18789b0b6b1687990554d082fc20afd",
+      "wnid": "n02979186",
+      "imagenet_target": 482
+    },
+    {
+      "path": "train/n03445777/ILSVRC2012_val_00012634.JPEG",
+      "sha256": "250349055e7b80afa8ffb99a9ff3bd629f5e95c2b9fb9ff042b0b7d35f0e6bf2",
+      "wnid": "n03445777",
+      "imagenet_target": 574
+    },
+    {
+      "path": "train/n03394916/ILSVRC2012_val_00048507.JPEG",
+      "sha256": "4841f53768d6425a499123b1a72499f23bc1575655b61e512c0381488e0b5a8e",
+      "wnid": "n03394916",
+      "imagenet_target": 566
+    },
+    {
+      "path": "train/n01440764/ILSVRC2012_val_00025527.JPEG",
+      "sha256": "f2f821100e30b0b685bbdaa4e5501bd4da3077d59c77aebf275a19ff3f7b9ab6",
+      "wnid": "n01440764",
+      "imagenet_target": 0
+    },
+    {
+      "path": "train/n01440764/ILSVRC2012_val_00009379.JPEG",
+      "sha256": "5c1aeb074aab6e92def2e32b18bbe9dca3d0323543e47b2f0784ee9a0edaad6f",
+      "wnid": "n01440764",
+      "imagenet_target": 0
+    },
+    {
+      "path": "val/n03888257/ILSVRC2012_val_00024340.JPEG",
+      "sha256": "e0406b75a13bd212fa3973707eb71953cae035201d602c594da70e1770a9b136",
+      "wnid": "n03888257",
+      "imagenet_target": 701
+    },
+    {
+      "path": "train/n03028079/ILSVRC2012_val_00023619.JPEG",
+      "sha256": "1b8c5be8370fb1684972d922e2526208f0c6cde43c7115fd38d6cc9c67da8c38",
+      "wnid": "n03028079",
+      "imagenet_target": 497
+    },
+    {
+      "path": "train/n01440764/ILSVRC2012_val_00026064.JPEG",
+      "sha256": "557071c297f3e7371b3bb0a94d4f522dee289e141779bd2aa6b42585cb52bc8e",
+      "wnid": "n01440764",
+      "imagenet_target": 0
+    },
+    {
+      "path": "train/n03445777/ILSVRC2012_val_00031486.JPEG",
+      "sha256": "b1c527fa527f77ad09da66810c8825ee42ac0975af808642786a6ebcfa77fb98",
+      "wnid": "n03445777",
+      "imagenet_target": 574
+    },
+    {
+      "path": "val/n03028079/ILSVRC2012_val_00016832.JPEG",
+      "sha256": "61f47ad67b27214f11431668a2178941987bbf7590391c2b41ad5c542ec97124",
+      "wnid": "n03028079",
+      "imagenet_target": 497
+    },
+    {
+      "path": "val/n03028079/ILSVRC2012_val_00048382.JPEG",
+      "sha256": "840aabfe3cc67c4557e81eb46a029c05a8ac53fd41d37de210e4097e245a4943",
+      "wnid": "n03028079",
+      "imagenet_target": 497
+    },
+    {
+      "path": "train/n03425413/ILSVRC2012_val_00009279.JPEG",
+      "sha256": "426abe84b8e2f6a8bc4409a7d4f4793c5e2e2a6bd66d27b5253f4519f02e37d7",
+      "wnid": "n03425413",
+      "imagenet_target": 571
+    },
+    {
+      "path": "train/n03888257/ILSVRC2012_val_00009559.JPEG",
+      "sha256": "e58d37f196894385a86cb1370019003b893ba43e442e9377819373779d214fc5",
+      "wnid": "n03888257",
+      "imagenet_target": 701
+    },
+    {
+      "path": "val/n03394916/ILSVRC2012_val_00011691.JPEG",
+      "sha256": "9cac479d91979236d41535b7bd6fecf4c089a6840278c1af1382ad5eb4e0a5c9",
+      "wnid": "n03394916",
+      "imagenet_target": 566
+    },
+    {
+      "path": "train/n01440764/ILSVRC2012_val_00003014.JPEG",
+      "sha256": "b2868a8190fd2862808fbdd7c2e7624028019b9872fa44bfee4312f1475bd610",
+      "wnid": "n01440764",
+      "imagenet_target": 0
+    },
+    {
+      "path": "train/n03000684/ILSVRC2012_val_00044204.JPEG",
+      "sha256": "7dea9b3ffc3d0e5f2b879a9b894c50fd1e8ed965f6d88ffd3c6b7f9e18d8cce9",
+      "wnid": "n03000684",
+      "imagenet_target": 491
+    },
+    {
+      "path": "train/n03394916/ILSVRC2012_val_00044598.JPEG",
+      "sha256": "caa09030902e175558f441edb313c02fc5e2a3a05cc93cb1b12073b0cdca56aa",
+      "wnid": "n03394916",
+      "imagenet_target": 566
+    },
+    {
+      "path": "train/n03394916/ILSVRC2012_val_00019593.JPEG",
+      "sha256": "fa6b238c74608b1d1f85487ceea77917f60ce8facc22812bcbc471e52916dc34",
+      "wnid": "n03394916",
+      "imagenet_target": 566
+    },
+    {
+      "path": "train/n02102040/ILSVRC2012_val_00038569.JPEG",
+      "sha256": "36c2675d7e1ce8258de7c67d2899eb2d31dc58452ae6b36425a40eabf5bf8b54",
+      "wnid": "n02102040",
+      "imagenet_target": 217
+    },
+    {
+      "path": "train/n01440764/ILSVRC2012_val_00031333.JPEG",
+      "sha256": "2dee060a20c61f6dcad8c9651075263da0aad322ad52425effb8ecfd3016a500",
+      "wnid": "n01440764",
+      "imagenet_target": 0
+    },
+    {
+      "path": "train/n02102040/ILSVRC2012_val_00008334.JPEG",
+      "sha256": "fbbac1367b332883d758744ae1fffa3f6f0c874e37e8d833da493b8243cdbcb4",
+      "wnid": "n02102040",
+      "imagenet_target": 217
+    },
+    {
+      "path": "train/n03888257/ILSVRC2012_val_00023107.JPEG",
+      "sha256": "49265f09c580acab9b89f6b9345b87d94341db9d3b8226423f5cc6733d870b10",
+      "wnid": "n03888257",
+      "imagenet_target": 701
+    },
+    {
+      "path": "train/n03445777/ILSVRC2012_val_00019268.JPEG",
+      "sha256": "af0fca63dc80f244881da9fa54bafd6a4c0affc30ba845d0a372f2da98aefc66",
+      "wnid": "n03445777",
+      "imagenet_target": 574
+    },
+    {
+      "path": "train/n01440764/ILSVRC2012_val_00017699.JPEG",
+      "sha256": "11e2c5f8f560bc43d59fbf8e1cc2f1bf70af3c7127bf68de3256eb353aa96e5c",
+      "wnid": "n01440764",
+      "imagenet_target": 0
+    },
+    {
+      "path": "train/n02102040/ILSVRC2012_val_00027918.JPEG",
+      "sha256": "4e88f13f32e133dbce502dea761546d74518293430f06dd79e7855cda252e31e",
+      "wnid": "n02102040",
+      "imagenet_target": 217
+    },
+    {
+      "path": "val/n03028079/ILSVRC2012_val_00007400.JPEG",
+      "sha256": "eb43f17be3939c8ba9031da8a4b11ed590fc24f6ac0b0fd354cd8185679f594c",
+      "wnid": "n03028079",
+      "imagenet_target": 497
+    },
+    {
+      "path": "train/n03028079/ILSVRC2012_val_00008116.JPEG",
+      "sha256": "26a21ee7c4de5de104d1320cedfdbe71550febee388bf738ea162f17a736bc43",
+      "wnid": "n03028079",
+      "imagenet_target": 497
+    },
+    {
+      "path": "train/n03417042/ILSVRC2012_val_00019147.JPEG",
+      "sha256": "78529b886aa3dd169832cb90a7ac771a2cffefd2af2ac07b7d2b509e4fec2b51",
+      "wnid": "n03417042",
+      "imagenet_target": 569
+    },
+    {
+      "path": "train/n01440764/ILSVRC2012_val_00006697.JPEG",
+      "sha256": "c4187c81731c4857a86df8b368a544258eb5c90cd5b086980255cda5a073e714",
+      "wnid": "n01440764",
+      "imagenet_target": 0
+    },
+    {
+      "path": "train/n01440764/ILSVRC2012_val_00048969.JPEG",
+      "sha256": "6be2dff8188bd23d498b7176b361a86f3c3b7151a62a133e60d238ceefd6476c",
+      "wnid": "n01440764",
+      "imagenet_target": 0
+    },
+    {
+      "path": "val/n03000684/ILSVRC2012_val_00011170.JPEG",
+      "sha256": "3e0c3c325980fd17436becd41fefc511758c9d05a6b67a8e84bdea03b102f5b9",
+      "wnid": "n03000684",
+      "imagenet_target": 491
+    },
+    {
+      "path": "train/n02979186/ILSVRC2012_val_00018559.JPEG",
+      "sha256": "28878f3fe2aa64452e66234fe903272a916089c0e1800d69c871c2b7319eb0ca",
+      "wnid": "n02979186",
+      "imagenet_target": 482
+    },
+    {
+      "path": "train/n03888257/ILSVRC2012_val_00047147.JPEG",
+      "sha256": "3572ebb7c10c86d2aa23b2510a5b570a212ea77fa8f3b47dad3f3510926a99f8",
+      "wnid": "n03888257",
+      "imagenet_target": 701
+    },
+    {
+      "path": "val/n01440764/ILSVRC2012_val_00009111.JPEG",
+      "sha256": "35f017eff957abc92897ed441585a7e48076efe8213661b062d8e40a01f5483d",
+      "wnid": "n01440764",
+      "imagenet_target": 0
+    },
+    {
+      "path": "train/n03445777/ILSVRC2012_val_00038447.JPEG",
+      "sha256": "4da009ac9fe523a7f082b36b4eb9833cf2d715fbd838a0ac72ba1507470f928a",
+      "wnid": "n03445777",
+      "imagenet_target": 574
+    },
+    {
+      "path": "val/n03888257/ILSVRC2012_val_00010460.JPEG",
+      "sha256": "d97a9018f38d6825e87712afe2fcffc1848de42e82512af69e6995859522cddc",
+      "wnid": "n03888257",
+      "imagenet_target": 701
+    },
+    {
+      "path": "val/n03888257/ILSVRC2012_val_00001440.JPEG",
+      "sha256": "3ea1d2aa71fb64f0a890a7af29c97d7e67a1af5eb78cbcc0d32c95f543d1e7f8",
+      "wnid": "n03888257",
+      "imagenet_target": 701
+    },
+    {
+      "path": "train/n02102040/ILSVRC2012_val_00021205.JPEG",
+      "sha256": "02adf0aedc8f1cee0daf027d0b357f2c7c2dce86cc6abc25d7628d47aa28415f",
+      "wnid": "n02102040",
+      "imagenet_target": 217
+    },
+    {
+      "path": "train/n03000684/ILSVRC2012_val_00031413.JPEG",
+      "sha256": "7d9f6b0f4f539051ed3a09ab87b5c84ff4174615749a2773b837b84abbf27436",
+      "wnid": "n03000684",
+      "imagenet_target": 491
+    },
+    {
+      "path": "train/n03000684/ILSVRC2012_val_00006043.JPEG",
+      "sha256": "f6786173e6f61b3b26ff2cde657a802d5adc5c20f25717270789347047fb0661",
+      "wnid": "n03000684",
+      "imagenet_target": 491
+    },
+    {
+      "path": "train/n03000684/ILSVRC2012_val_00048919.JPEG",
+      "sha256": "044b475687258a8d45bd650a904ab5840642566a5a4b6228013af566ba078d42",
+      "wnid": "n03000684",
+      "imagenet_target": 491
+    },
+    {
+      "path": "train/n03000684/ILSVRC2012_val_00025878.JPEG",
+      "sha256": "be91ad00e6003f6cf0a0d05b35387a362ca00dd5445927fac509366edc7b72d1",
+      "wnid": "n03000684",
+      "imagenet_target": 491
+    },
+    {
+      "path": "val/n01440764/ILSVRC2012_val_00009191.JPEG",
+      "sha256": "6b1d89c440f3a1d3718c2a50796319bc777bcda2c5b36de9a9c08043646dac53",
+      "wnid": "n01440764",
+      "imagenet_target": 0
+    },
+    {
+      "path": "val/n02979186/ILSVRC2012_val_00020400.JPEG",
+      "sha256": "47fabcf8382f6acff0f7fd34315d9c3c932aa49642d3b568ed542e8ece683070",
+      "wnid": "n02979186",
+      "imagenet_target": 482
+    },
+    {
+      "path": "train/n01440764/ILSVRC2012_val_00045866.JPEG",
+      "sha256": "7235be6c08c04c34714a3534af929d2f5da54a417b53a4c3bf4727717e36b1e8",
+      "wnid": "n01440764",
+      "imagenet_target": 0
+    },
+    {
+      "path": "train/n03000684/ILSVRC2012_val_00009206.JPEG",
+      "sha256": "e103bc613fa0a0054012d723e8647f17b975bc439c4edb2a73e09028fa415702",
+      "wnid": "n03000684",
+      "imagenet_target": 491
+    },
+    {
+      "path": "train/n03394916/ILSVRC2012_val_00028399.JPEG",
+      "sha256": "337fb6bee525e906969e9ce0b747356e30a7df16632189082885fb86600c42a1",
+      "wnid": "n03394916",
+      "imagenet_target": 566
+    },
+    {
+      "path": "val/n03028079/ILSVRC2012_val_00046550.JPEG",
+      "sha256": "e01db27afd67ae9e7e9655a65a873aaf7a76fc022849b0f73cc4eba8d3483ad0",
+      "wnid": "n03028079",
+      "imagenet_target": 497
+    },
+    {
+      "path": "train/n03888257/ILSVRC2012_val_00018229.JPEG",
+      "sha256": "26e17b7d32c810eea291d7cd1e341cc796c4f5a6a352dbcee0caf85a4fad8356",
+      "wnid": "n03888257",
+      "imagenet_target": 701
+    },
+    {
+      "path": "train/n03888257/ILSVRC2012_val_00010427.JPEG",
+      "sha256": "9fa9436419acd323b49031c934283b735b68d0f691e95cc6d4b58172f5abc9cc",
+      "wnid": "n03888257",
+      "imagenet_target": 701
+    },
+    {
+      "path": "train/n03394916/ILSVRC2012_val_00013915.JPEG",
+      "sha256": "acc6d53aae427b657246ea677614cd27c4249b36d7d0600db9397813776db536",
+      "wnid": "n03394916",
+      "imagenet_target": 566
+    },
+    {
+      "path": "val/n03445777/ILSVRC2012_val_00041672.JPEG",
+      "sha256": "62ef02186beff4ed51fbcbf89ff9edd044b27b5e376159533515fab756cfc915",
+      "wnid": "n03445777",
+      "imagenet_target": 574
+    },
+    {
+      "path": "val/n03417042/ILSVRC2012_val_00033842.JPEG",
+      "sha256": "29ec9c3574c703c5eb39b5514f1d6c1607c43a718a6a7564f919aa4692182d98",
+      "wnid": "n03417042",
+      "imagenet_target": 569
+    },
+    {
+      "path": "train/n03445777/ILSVRC2012_val_00007947.JPEG",
+      "sha256": "1ebda20b7455560e6d066bc59748ceaaf3ca7f8753f2babb5927005eab418e12",
+      "wnid": "n03445777",
+      "imagenet_target": 574
+    },
+    {
+      "path": "train/n02979186/ILSVRC2012_val_00016648.JPEG",
+      "sha256": "f2701ae9666920ddc1582c5316d229f645d88695b28f93ab50e74c752047dd7e",
+      "wnid": "n02979186",
+      "imagenet_target": 482
+    },
+    {
+      "path": "train/n03888257/ILSVRC2012_val_00034544.JPEG",
+      "sha256": "a98794acd5c2fdff8082baee3e7cdc0aba950d23cd999afa24bd3c2e46943dae",
+      "wnid": "n03888257",
+      "imagenet_target": 701
+    },
+    {
+      "path": "train/n03417042/ILSVRC2012_val_00021253.JPEG",
+      "sha256": "6e7fa5acf24295e759280e8b32d25f53ed355de1c907c9ad144ad5e0e46c518f",
+      "wnid": "n03417042",
+      "imagenet_target": 569
+    },
+    {
+      "path": "train/n03425413/ILSVRC2012_val_00018516.JPEG",
+      "sha256": "0cfdac665ee43ba3efe490cd0e33b2871f19a56f17b386f71bdfdca2eef4befa",
+      "wnid": "n03425413",
+      "imagenet_target": 571
+    },
+    {
+      "path": "train/n03425413/ILSVRC2012_val_00022538.JPEG",
+      "sha256": "3832ac5e24da301dcf0c853689a787e4fbda7342f71e77d22c36075fb45a0711",
+      "wnid": "n03425413",
+      "imagenet_target": 571
+    },
+    {
+      "path": "train/n02102040/ILSVRC2012_val_00004553.JPEG",
+      "sha256": "4d8dd27288965d6f950857df2fadef743f45db3d194e94523cd6ad82dcbed457",
+      "wnid": "n02102040",
+      "imagenet_target": 217
+    },
+    {
+      "path": "train/n03417042/ILSVRC2012_val_00009345.JPEG",
+      "sha256": "e89900b23a66aa973baa3832899bb6a608648239e415c819cec61867cd044b1f",
+      "wnid": "n03417042",
+      "imagenet_target": 569
+    },
+    {
+      "path": "val/n03000684/ILSVRC2012_val_00036092.JPEG",
+      "sha256": "b8278385c2b640688ac879ceda06f53373ebcc3d155e75dd972912f70aed5e61",
+      "wnid": "n03000684",
+      "imagenet_target": 491
+    },
+    {
+      "path": "train/n01440764/ILSVRC2012_val_00017995.JPEG",
+      "sha256": "168c770d2da771bbd11dbefb944bbdc14123b4b2207fdacf7f1b63d0632509ec",
+      "wnid": "n01440764",
+      "imagenet_target": 0
+    },
+    {
+      "path": "val/n02102040/ILSVRC2012_val_00004650.JPEG",
+      "sha256": "6a68fe50375437c8ff4aed686da10a524dfe714a8acc7034c9258e1fd56d56bc",
+      "wnid": "n02102040",
+      "imagenet_target": 217
+    },
+    {
+      "path": "val/n01440764/ILSVRC2012_val_00030740.JPEG",
+      "sha256": "4fb166830e48a43c52a9e9c460118cb2d4c47b4e265aa56d978fd643fa10a80d",
+      "wnid": "n01440764",
+      "imagenet_target": 0
+    },
+    {
+      "path": "train/n03000684/ILSVRC2012_val_00031549.JPEG",
+      "sha256": "d3d8523c44d9d5b934ec6237a28ba8b0963418738289222106fce8a024ea8bed",
+      "wnid": "n03000684",
+      "imagenet_target": 491
+    },
+    {
+      "path": "val/n03445777/ILSVRC2012_val_00014102.JPEG",
+      "sha256": "bb276e5c1a24df49d36b2af91228dec41528e721bf7b5647a01b7e46c3f86a29",
+      "wnid": "n03445777",
+      "imagenet_target": 574
+    },
+    {
+      "path": "train/n03000684/ILSVRC2012_val_00034727.JPEG",
+      "sha256": "20caa85e3adc92602f7c6dea6f8b80cf157716c5e25ca94686cb6adfc7753ab8",
+      "wnid": "n03000684",
+      "imagenet_target": 491
+    },
+    {
+      "path": "val/n03000684/ILSVRC2012_val_00026061.JPEG",
+      "sha256": "0185121b6158615d0f23bb1a6b4ba4a4909cb66f37c707645daad9e678647a6e",
+      "wnid": "n03000684",
+      "imagenet_target": 491
+    },
+    {
+      "path": "val/n03425413/ILSVRC2012_val_00035242.JPEG",
+      "sha256": "d117a0c7e022f0566181c8599c9b84d93b38fcb40ec480f703da9bedc592effa",
+      "wnid": "n03425413",
+      "imagenet_target": 571
+    },
+    {
+      "path": "train/n03445777/ILSVRC2012_val_00035419.JPEG",
+      "sha256": "dbdeeb8ee9eb85c6f357fed978080f79ee532da762f954fd1ac33d5e1b47ad10",
+      "wnid": "n03445777",
+      "imagenet_target": 574
+    },
+    {
+      "path": "val/n02102040/ILSVRC2012_val_00022412.JPEG",
+      "sha256": "bdd249d8ebfcd0e78ba15c08573bc133db5650cd8edb28813393e06ea08bada5",
+      "wnid": "n02102040",
+      "imagenet_target": 217
+    },
+    {
+      "path": "train/n02102040/ILSVRC2012_val_00040546.JPEG",
+      "sha256": "45f180d95e658b4ca17fa950f360a98964ead89b5ebe99b56d76a99db7b76245",
+      "wnid": "n02102040",
+      "imagenet_target": 217
+    }
+  ],
+  "limitations": "A small, ten-class validation subset; accuracy does not represent the full ImageNet benchmark or production data."
+}

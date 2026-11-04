@@ -1,0 +1,5 @@
+method,status,device,backend,precision,batch_size,input_dtype,latency_median_ms,latency_p95_ms,throughput_samples_per_sec,peak_gpu_memory_bytes,gpu_resident_before_inference_bytes,gpu_transient_bytes,weight_bytes,serialized_model_bytes,cpu_peak_memory_bytes,comparable,speedup,memory_reduction_percent,weight_reduction_percent,validation_passed,maximum_absolute_error,mean_absolute_error,maximum_relative_error,class_agreement,baseline_accuracy,optimized_accuracy,reason
+
+baseline,ok,cuda:0,pytorch,fp32,1,torch.float32,5.71865,7.340555,170.42965885095188,109831168,82066432,27764736,46796608,46836747,,,,,,,,,,,,,
+
+fp16,rejected,cuda:0,pytorch,fp16,1,torch.float16,7.8340499999999995,9.062415,124.27990153717667,64969216,59243008,5726208,23398384,23438539,,True,0.7299736407094671,40.84628509094978,49.99982904743865,False,0.0020270347595214844,0.00043706907083590826,2.2192710673825125,1.0,,,

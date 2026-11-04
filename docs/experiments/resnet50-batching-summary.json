@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "experiment": "batching-study",
+  "model": "resnet50",
+  "dataset_sha256": "cb7a0aeeb81ac1bb1a962cb421151e7b6fa3b701c5c56d78519c49f43bc62b3e",
+  "timing": {
+    "warmup": 10,
+    "repeats": 50
+  },
+  "device": "cuda:0",
+  "records": [
+    {
+      "batch_size": 1,
+      "precision": "fp32",
+      "status": "ok",
+      "batch_latency_median_ms": 12.97115,
+      "batch_latency_p95_ms": 17.191564999999994,
+      "throughput_images_per_second": 73.32285696353037,
+      "peak_gpu_memory_mib": 158.64208984375,
+      "correct": 155,
+      "total": 200,
+      "numerical_validation": "reference",
+      "validation_scope": "FP32 batch 1 versus batch 8",
+      "latency_speedup_within_batch": null
+    },
+    {
+      "batch_size": 1,
+      "precision": "fp16",
+      "status": "rejected",
+      "batch_latency_median_ms": 19.2013,
+      "batch_latency_p95_ms": 25.72007,
+      "throughput_images_per_second": 49.50111293352209,
+      "peak_gpu_memory_mib": 88.916015625,
+      "correct": 155,
+      "total": 200,
+      "numerical_validation": "FAIL",
+      "validation_scope": "FP16 versus FP32 within the same batch size",
+      "latency_speedup_within_batch": 0.6755349898183977
+    },
+    {
+      "batch_size": 8,
+      "precision": "fp32",
+      "status": "ok",
+      "batch_latency_median_ms": 23.941499999999998,
+      "batch_latency_p95_ms": 28.60649,
+      "throughput_images_per_second": 327.32717963691067,
+      "peak_gpu_memory_mib": 214.94677734375,
+      "correct": 155,
+      "total": 200,
+      "numerical_validation": "PASS",
+      "validation_scope": "FP32 batch 1 versus batch 8",
+      "latency_speedup_within_batch": null
+    },
+    {
+      "batch_size": 8,
+      "precision": "fp16",
+      "status": "rejected",
+      "batch_latency_median_ms": 20.42595,
+      "batch_latency_p95_ms": 26.267664999999997,
+      "throughput_images_per_second": 380.09358664290323,
+      "peak_gpu_memory_mib": 127.81396484375,
+      "correct": 155,
+      "total": 200,
+      "numerical_validation": "FAIL",
+      "validation_scope": "FP16 versus FP32 within the same batch size",
+      "latency_speedup_within_batch": 1.1721119458336087
+    }
+  ],
+  "quality_equivalence": {
+    "passed": true,
+    "finite": true,
+    "maximum_absolute_error": 1.9073486328125e-06,
+    "mean_absolute_error": 4.664953099563718e-08,
+    "maximum_relative_error": 0.0943952802359882,
+    "relative_error_denominator_floor": 1e-08,
+    "class_agreement": 1.0,
+    "accuracy_measured": true,
+    "baseline_accuracy": 0.775,
+    "optimized_accuracy": 0.775,
+    "baseline_correct": 155,
+    "optimized_correct": 155,
+    "validation_examples": 200,
+    "atol": 0.001,
+    "rtol": 0.01,
+    "pass_rule": "Every element: abs(candidate-reference) <= atol + rtol*abs(reference)",
+    "accuracy_note": "Accuracy on supplied labels only.",
+    "accuracy_drop": 0.0,
+    "max_accuracy_drop": 0.01
+  },
+  "standard_cross_batch_comparison": {
+    "comparable": false,
+    "speedup": null,
+    "memory_reduction_percent": null,
+    "weight_reduction_percent": 0.0
+  },
+  "workload_comparison": {
+    "fp32_throughput_ratio_batch8_vs1": 4.464190201968235,
+    "fp32_peak_gpu_memory_increase_percent": 35.491645095860555,
+    "note": "Batch sizes deliberately differ. This ratio measures images/second, not single-image latency speedup."
+  },
+  "source_reports": {
+    "1": "results\\batching-resnet50\\batch1\\20261031T201859Z-d7cfbc17",
+    "8": "results\\batching-resnet50\\batch8\\20261031T201924Z-f41f8902"
+  }
+}

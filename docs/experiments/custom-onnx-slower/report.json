@@ -1,0 +1,220 @@
+{
+  "schema_version": 1,
+  "experiment": "inference",
+  "hardware": {
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+    "versions": {
+      "torch": "2.9.1",
+      "torchvision": "0.24.1",
+      "numpy": "2.2.6",
+      "onnx": "1.23.2",
+      "onnxruntime": "1.31.1",
+      "rich": "14.2.0"
+    },
+    "cuda_available": false,
+    "torch_cuda": null,
+    "gpu": null,
+    "cpu_threads": 1,
+    "quantized_engines": [
+      "onednn"
+    ]
+  },
+  "config": {
+    "model": "examples.custom_model:load_model",
+    "weights": "none",
+    "device": "cpu",
+    "input_shape": [
+      8,
+      16
+    ],
+    "seed": 42,
+    "threads": 1,
+    "validation_batches": 3,
+    "dataset": "results/synthetic-labels.npz",
+    "objective": "latency",
+    "min_improvement": 0.01,
+    "max_accuracy_drop": 0.01
+  },
+  "timing": {
+    "warmup": 3,
+    "repeats": 20
+  },
+  "model": {
+    "name": "examples.custom_model:load_model",
+    "architecture": "Sequential",
+    "weights": "none",
+    "parameters": 1348,
+    "trainable_parameters": 1348,
+    "architecture_repr": "Sequential(\n  (0): Linear(in_features=16, out_features=64, bias=True)\n  (1): ReLU()\n  (2): Linear(in_features=64, out_features=4, bias=True)\n)"
+  },
+  "warnings": [],
+  "candidates": [
+    {
+      "method": "onnx",
+      "details": {
+        "export_path": "results\\20261031T162257Z-b0a251f1\\onnx\\model.onnx",
+        "opset": 17,
+        "graph_optimization": "ORT_ENABLE_ALL",
+        "note": "Export and session creation excluded from steady-state latency."
+      },
+      "setup_seconds": 0.46752310008741915,
+      "status": "ok",
+      "validation": {
+        "passed": true,
+        "finite": true,
+        "maximum_absolute_error": 8.940696716308594e-08,
+        "mean_absolute_error": 1.9591728535791237e-08,
+        "maximum_relative_error": 3.388107870705426e-05,
+        "relative_error_denominator_floor": 1e-08,
+        "class_agreement": 1.0,
+        "accuracy_measured": true,
+        "baseline_accuracy": 0.20833333333333334,
+        "optimized_accuracy": 0.20833333333333334,
+        "validation_examples": 24,
+        "atol": 0.001,
+        "rtol": 0.01,
+        "pass_rule": "Every element: abs(candidate-reference) <= atol + rtol*abs(reference)",
+        "accuracy_note": "Accuracy on supplied labels only.",
+        "accuracy_drop": 0.0,
+        "max_accuracy_drop": 0.01
+      },
+      "metrics": {
+        "device": "cpu",
+        "backend": "onnxruntime/cpu",
+        "precision": "fp32",
+        "batch_size": 8,
+        "input_shape": [
+          8,
+          16
+        ],
+        "input_dtype": "torch.float32",
+        "latency_median_ms": 0.03765,
+        "latency_p95_ms": 0.06395,
+        "throughput_samples_per_sec": 182982.6166514181,
+        "latencies_ms": [
+          0.0367,
+          0.0339,
+          0.0333,
+          0.0323,
+          0.0329,
+          0.035,
+          0.0326,
+          0.032,
+          0.0327,
+          0.0386,
+          0.0636,
+          0.0687,
+          0.0637,
+          0.0608,
+          0.0567,
+          0.0449,
+          0.0424,
+          0.056,
+          0.0445,
+          0.0331
+        ],
+        "peak_gpu_memory_bytes": null,
+        "gpu_resident_before_inference_bytes": null,
+        "gpu_transient_bytes": null,
+        "weight_bytes": 5392,
+        "serialized_model_bytes": 5838,
+        "measurement": {
+          "warmup": 3,
+          "repeats": 20
+        },
+        "cpu_peak_memory_bytes": null
+      },
+      "comparison": {
+        "comparable": true,
+        "speedup": 0.8167330677290836,
+        "memory_reduction_percent": null,
+        "weight_reduction_percent": 0.0
+      },
+      "objective_score": 1.2243902439024392
+    }
+  ],
+  "limitations": [
+    "Accuracy covers only the supplied preprocessed dataset.",
+    "CPU peak inference memory is not measured; weight bytes are a separate metric.",
+    "GPU peak measures PyTorch allocated tensors (weights, input, activations), not total device VRAM or reserved cache.",
+    "Candidates are measured sequentially with only one target model resident on GPU.",
+    "Transformation/setup/compilation excluded from steady-state timing; setup recorded separately.",
+    "Training and inference settings are experimental, not universal optimization guarantees."
+  ],
+  "baseline": {
+    "device": "cpu",
+    "backend": "pytorch",
+    "precision": "fp32",
+    "batch_size": 8,
+    "input_shape": [
+      8,
+      16
+    ],
+    "input_dtype": "torch.float32",
+    "latency_median_ms": 0.03075,
+    "latency_p95_ms": 0.05084000000000003,
+    "throughput_samples_per_sec": 223995.5200895982,
+    "latencies_ms": [
+      0.0488,
+      0.0393,
+      0.0344,
+      0.0896,
+      0.0422,
+      0.0359,
+      0.0311,
+      0.0304,
+      0.0302,
+      0.0293,
+      0.0298,
+      0.031,
+      0.0312,
+      0.0298,
+      0.0305,
+      0.0299,
+      0.0314,
+      0.0303,
+      0.0297,
+      0.0295
+    ],
+    "peak_gpu_memory_bytes": null,
+    "gpu_resident_before_inference_bytes": null,
+    "gpu_transient_bytes": null,
+    "weight_bytes": 5392,
+    "serialized_model_bytes": 7645,
+    "measurement": {
+      "warmup": 3,
+      "repeats": 20
+    },
+    "cpu_peak_memory_bytes": null
+  },
+  "baseline_validation": {
+    "passed": true,
+    "finite": true,
+    "maximum_absolute_error": 0.0,
+    "mean_absolute_error": 0.0,
+    "maximum_relative_error": 0.0,
+    "relative_error_denominator_floor": 1e-08,
+    "class_agreement": 1.0,
+    "accuracy_measured": true,
+    "baseline_accuracy": 0.20833333333333334,
+    "optimized_accuracy": 0.20833333333333334,
+    "validation_examples": 24,
+    "atol": 0.001,
+    "rtol": 0.01,
+    "pass_rule": "Every element: abs(candidate-reference) <= atol + rtol*abs(reference)",
+    "accuracy_note": "Accuracy on supplied labels only."
+  },
+  "selection": {
+    "winner": "baseline",
+    "improved": false,
+    "objective": "latency",
+    "score": 1.0,
+    "required_fractional_improvement": 0.01,
+    "reason": "No validated candidate exceeded the baseline by the required margin.",
+    "caveat": "Single-session measurements; small gains may be timing noise. Repeat independently."
+  },
+  "created_at_utc": "2026-10-31T16:22:58.137861+00:00",
+  "run_directory": "results\\20261031T162257Z-b0a251f1"
+}

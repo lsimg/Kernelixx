@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "experiment": "batching-repeat-study",
+  "model": "resnet50",
+  "device": "cuda:0",
+  "dataset_sha256": "cb7a0aeeb81ac1bb1a962cb421151e7b6fa3b701c5c56d78519c49f43bc62b3e",
+  "seed": 42,
+  "threads": 1,
+  "warmup": 10,
+  "repeats": 50,
+  "trial_order": "1,8; 8,1; alternating thereafter",
+  "records": [
+    {
+      "trial": 1,
+      "position_in_pair": 1,
+      "batch_size": 1,
+      "images_per_second": 70.0747276896082,
+      "batch_latency_median_ms": 13.712399999999999,
+      "batch_latency_p95_ms": 17.838525,
+      "peak_gpu_memory_bytes": 166348288,
+      "correct": 155,
+      "total": 200,
+      "report_path": "results\\batching-resnet50\\repeats-20261101\\trial-1\\batch1\\20261031T203543Z-dd059e7b\\report.json"
+    },
+    {
+      "trial": 1,
+      "position_in_pair": 2,
+      "batch_size": 8,
+      "images_per_second": 264.80987280056365,
+      "batch_latency_median_ms": 23.990450000000003,
+      "batch_latency_p95_ms": 45.923505,
+      "peak_gpu_memory_bytes": 225388032,
+      "correct": 155,
+      "total": 200,
+      "report_path": "results\\batching-resnet50\\repeats-20261101\\trial-1\\batch8\\20261031T203600Z-1f17ff4c\\report.json"
+    },
+    {
+      "trial": 2,
+      "position_in_pair": 1,
+      "batch_size": 8,
+      "images_per_second": 321.1944837416973,
+      "batch_latency_median_ms": 23.412100000000002,
+      "batch_latency_p95_ms": 32.157914999999996,
+      "peak_gpu_memory_bytes": 225388032,
+      "correct": 155,
+      "total": 200,
+      "report_path": "results\\batching-resnet50\\repeats-20261101\\trial-2\\batch8\\20261031T203617Z-08f347ec\\report.json"
+    },
+    {
+      "trial": 2,
+      "position_in_pair": 2,
+      "batch_size": 1,
+      "images_per_second": 69.11969706772126,
+      "batch_latency_median_ms": 13.8265,
+      "batch_latency_p95_ms": 18.66892,
+      "peak_gpu_memory_bytes": 166348288,
+      "correct": 155,
+      "total": 200,
+      "report_path": "results\\batching-resnet50\\repeats-20261101\\trial-2\\batch1\\20261031T203633Z-32548730\\report.json"
+    },
+    {
+      "trial": 3,
+      "position_in_pair": 1,
+      "batch_size": 1,
+      "images_per_second": 66.81171043590899,
+      "batch_latency_median_ms": 14.70275,
+      "batch_latency_p95_ms": 17.930125,
+      "peak_gpu_memory_bytes": 166348288,
+      "correct": 155,
+      "total": 200,
+      "report_path": "results\\batching-resnet50\\repeats-20261101\\trial-3\\batch1\\20261031T203651Z-dd6ae381\\report.json"
+    },
+    {
+      "trial": 3,
+      "position_in_pair": 2,
+      "batch_size": 8,
+      "images_per_second": 326.1665039231715,
+      "batch_latency_median_ms": 23.7773,
+      "batch_latency_p95_ms": 29.428945,
+      "peak_gpu_memory_bytes": 225388032,
+      "correct": 155,
+      "total": 200,
+      "report_path": "results\\batching-resnet50\\repeats-20261101\\trial-3\\batch8\\20261031T203710Z-b7cb838c\\report.json"
+    }
+  ],
+  "statistics": {
+    "trial_count": 3,
+    "batch1_images_per_second": {
+      "median": 69.11969706772126,
+      "minimum": 66.81171043590899,
+      "maximum": 70.0747276896082,
+      "sample_standard_deviation": 1.6776058028881806
+    },
+    "batch8_images_per_second": {
+      "median": 321.1944837416973,
+      "minimum": 264.80987280056365,
+      "maximum": 326.1665039231715,
+      "sample_standard_deviation": 34.07976310164084
+    },
+    "paired_throughput_ratios": [
+      3.778963993602988,
+      4.6469312998724694,
+      4.881876272813819
+    ],
+    "paired_ratio_statistics": {
+      "median": 4.6469312998724694,
+      "minimum": 3.778963993602988,
+      "maximum": 4.881876272813819,
+      "sample_standard_deviation": 0.5809449028231422
+    },
+    "trials_with_batch8_higher_throughput": 3,
+    "note": "Descriptive statistics of whole-process trials; no confidence interval or significance claim."
+  },
+  "quality_equivalence": {
+    "passed": true,
+    "finite": true,
+    "maximum_absolute_error": 1.9073486328125e-06,
+    "mean_absolute_error": 4.664953099563718e-08,
+    "maximum_relative_error": 0.0943952802359882,
+    "relative_error_denominator_floor": 1e-08,
+    "class_agreement": 1.0,
+    "accuracy_measured": true,
+    "baseline_accuracy": 0.775,
+    "optimized_accuracy": 0.775,
+    "baseline_correct": 155,
+    "optimized_correct": 155,
+    "validation_examples": 200,
+    "atol": 0.001,
+    "rtol": 0.01,
+    "pass_rule": "Every element: abs(candidate-reference) <= atol + rtol*abs(reference)",
+    "accuracy_note": "Accuracy on supplied labels only.",
+    "accuracy_drop": 0.0,
+    "max_accuracy_drop": 0.01
+  }
+}

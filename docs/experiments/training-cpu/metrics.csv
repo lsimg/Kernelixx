@@ -1,0 +1,5 @@
+method,status,device,latency_median_ms,latency_p95_ms,throughput_samples_per_sec,peak_gpu_memory_bytes,reason
+
+fp32,ok,cpu,4.4279,5.7152199999999995,1694.498809614586,,
+
+amp-fp16,skipped,,,,,,AMP FP16 requires a compatible CUDA GPU

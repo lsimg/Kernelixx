@@ -1,0 +1,5 @@
+method,status,device,backend,precision,batch_size,input_dtype,latency_median_ms,latency_p95_ms,throughput_samples_per_sec,peak_gpu_memory_bytes,gpu_resident_before_inference_bytes,gpu_transient_bytes,weight_bytes,serialized_model_bytes,cpu_peak_memory_bytes,comparable,speedup,memory_reduction_percent,weight_reduction_percent,validation_passed,maximum_absolute_error,mean_absolute_error,maximum_relative_error,class_agreement,baseline_accuracy,optimized_accuracy,reason
+
+baseline,ok,cpu,pytorch,fp32,8,torch.float32,0.03075,0.05084000000000003,223995.5200895982,,,,5392,7645,,,,,,,,,,,,,
+
+onnx,ok,cpu,onnxruntime/cpu,fp32,8,torch.float32,0.03765,0.06395,182982.6166514181,,,,5392,5838,,True,0.8167330677290836,,0.0,True,8.940696716308594e-08,1.9591728535791237e-08,3.388107870705426e-05,1.0,0.20833333333333334,0.20833333333333334,

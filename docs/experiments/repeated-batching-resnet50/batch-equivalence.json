@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "experiment": "batch-equivalence",
+  "model": "resnet50",
+  "weights": "default",
+  "device": "cuda:0",
+  "precision": "fp32",
+  "batch_sizes": [
+    1,
+    8
+  ],
+  "seed": 42,
+  "threads": 1,
+  "dataset": "results\\datasets\\imagenet-val-resnet50-200.npz",
+  "dataset_sha256": "cb7a0aeeb81ac1bb1a962cb421151e7b6fa3b701c5c56d78519c49f43bc62b3e",
+  "validation": {
+    "passed": true,
+    "finite": true,
+    "maximum_absolute_error": 1.9073486328125e-06,
+    "mean_absolute_error": 4.664953099563718e-08,
+    "maximum_relative_error": 0.0943952802359882,
+    "relative_error_denominator_floor": 1e-08,
+    "class_agreement": 1.0,
+    "accuracy_measured": true,
+    "baseline_accuracy": 0.775,
+    "optimized_accuracy": 0.775,
+    "baseline_correct": 155,
+    "optimized_correct": 155,
+    "validation_examples": 200,
+    "atol": 0.001,
+    "rtol": 0.01,
+    "pass_rule": "Every element: abs(candidate-reference) <= atol + rtol*abs(reference)",
+    "accuracy_note": "Accuracy on supplied labels only.",
+    "accuracy_drop": 0.0,
+    "max_accuracy_drop": 0.01
+  },
+  "hardware": {
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+    "versions": {
+      "torch": "2.9.1+cu128",
+      "torchvision": "0.24.1+cu128",
+      "numpy": "2.2.6",
+      "onnx": "1.23.2",
+      "onnxruntime": "1.31.1",
+      "rich": "14.2.0"
+    },
+    "torch_runtime_version": "2.9.1+cu128",
+    "driver_visible_gpus": [
+      {
+        "name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "driver": "591.91",
+        "total_memory_mib": 8188
+      }
+    ],
+    "cuda_available": true,
+    "torch_cuda": "12.8",
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "total_memory_bytes": 8585216000,
+      "compute_capability": "8.9"
+    },
+    "cpu_threads": 1,
+    "quantized_engines": [
+      "onednn"
+    ]
+  },
+  "warnings": [],
+  "note": "Untimed same-model comparison on identical ordered tensors; includes partial final batches."
+}

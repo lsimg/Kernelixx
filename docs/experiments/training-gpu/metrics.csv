@@ -1,0 +1,3 @@
+method,status,device,latency_median_ms,latency_p95_ms,throughput_samples_per_sec,peak_gpu_memory_bytes,reason,speedup,memory_reduction_percent
+fp32,ok,cuda:0,3.2514,4.04538,4941.052217657468,77505536,,,
+amp-fp16,ok,cuda:0,5.99155,7.862065,2662.1646504466894,76284928,,0.5426642521551184,1.5748655683124335

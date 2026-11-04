@@ -1,0 +1,360 @@
+{
+  "schema_version": 1,
+  "experiment": "inference",
+  "hardware": {
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+    "versions": {
+      "torch": "2.9.1+cu128",
+      "torchvision": "0.24.1+cu128",
+      "numpy": "2.2.6",
+      "onnx": "1.23.2",
+      "onnxruntime": "1.31.1",
+      "rich": "14.2.0"
+    },
+    "torch_runtime_version": "2.9.1+cu128",
+    "driver_visible_gpus": [
+      {
+        "name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "driver": "591.91",
+        "total_memory_mib": 8188
+      }
+    ],
+    "cuda_available": true,
+    "torch_cuda": "12.8",
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "total_memory_bytes": 8585216000,
+      "compute_capability": "8.9"
+    },
+    "cpu_threads": 1,
+    "quantized_engines": [
+      "onednn"
+    ]
+  },
+  "config": {
+    "model": "resnet50",
+    "weights": "default",
+    "device": "cpu",
+    "input_shape": [
+      1,
+      3,
+      224,
+      224
+    ],
+    "seed": 42,
+    "threads": 1,
+    "validation_batches": 3,
+    "dataset": "results/datasets/imagenet-val-resnet50-200.npz",
+    "objective": "latency",
+    "min_improvement": 0.01,
+    "max_accuracy_drop": 0.01,
+    "task": "auto"
+  },
+  "timing": {
+    "warmup": 5,
+    "repeats": 30
+  },
+  "model": {
+    "name": "resnet50",
+    "architecture": "ResNet",
+    "weights": "default",
+    "parameters": 25557032,
+    "trainable_parameters": 25557032,
+    "architecture_repr": "ResNet(\n  (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)\n  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n  (relu): ReLU(inplace=True)\n  (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)\n  (layer1): Sequential(\n    (0): Bottleneck(\n      (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n      (downsample): Sequential(\n        (0): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)\n        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      )\n    )\n    (1): Bottleneck(\n      (conv1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n    )\n    (2): Bottleneck(\n      (conv1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n    )\n  )\n  (layer2): Sequential(\n    (0): Bottleneck(\n      (conv1): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n      (downsample): Sequential(\n        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)\n        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      )\n    )\n    (1): Bottleneck(\n      (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n    )\n    (2): Bottleneck(\n      (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n    )\n    (3): Bottleneck(\n      (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n    )\n  )\n  (layer3): Sequential(\n    (0): Bottleneck(\n      (conv1): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n      (downsample): Sequential(\n        (0): Conv2d(512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False)\n        (1): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      )\n    )\n    (1): Bottleneck(\n      (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n    )\n    (2): Bottleneck(\n      (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n    )\n    (3): Bottleneck(\n      (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n    )\n    (4): Bottleneck(\n      (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n    )\n    (5): Bottleneck(\n      (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n    )\n  )\n  (layer4): Sequential(\n    (0): Bottleneck(\n      (conv1): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv3): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn3): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n      (downsample): Sequential(\n        (0): Conv2d(1024, 2048, kernel_size=(1, 1), stride=(2, 2), bias=False)\n        (1): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      )\n    )\n    (1): Bottleneck(\n      (conv1): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv3): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn3): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n    )\n    (2): Bottleneck(\n      (conv1): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (conv3): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)\n      (bn3): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n    )\n  )\n  (avgpool): AdaptiveAvgPool2d(output_size=(1, 1))\n  (fc): Linear(in_features=2048, out_features=1000, bias=True)\n)"
+  },
+  "validation_task": "classification",
+  "warnings": [],
+  "candidates": [
+    {
+      "method": "onnx",
+      "details": {
+        "export_path": "results\\resnet50-cpu\\20261031T201205Z-4d2b2272\\onnx\\model.onnx",
+        "opset": 17,
+        "graph_optimization": "ORT_ENABLE_ALL",
+        "note": "Export and session creation excluded from steady-state latency."
+      },
+      "setup_seconds": 3.133767600171268,
+      "status": "ok",
+      "validation": {
+        "passed": true,
+        "finite": true,
+        "maximum_absolute_error": 1.6808509826660156e-05,
+        "mean_absolute_error": 5.905066039122176e-07,
+        "maximum_relative_error": 0.2766798418972332,
+        "relative_error_denominator_floor": 1e-08,
+        "class_agreement": 1.0,
+        "accuracy_measured": true,
+        "baseline_accuracy": 0.775,
+        "optimized_accuracy": 0.775,
+        "baseline_correct": 155,
+        "optimized_correct": 155,
+        "validation_examples": 200,
+        "atol": 0.001,
+        "rtol": 0.01,
+        "pass_rule": "Every element: abs(candidate-reference) <= atol + rtol*abs(reference)",
+        "accuracy_note": "Accuracy on supplied labels only.",
+        "accuracy_drop": 0.0,
+        "max_accuracy_drop": 0.01
+      },
+      "metrics": {
+        "device": "cpu",
+        "backend": "onnxruntime/cpu",
+        "precision": "fp32",
+        "batch_size": 1,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ],
+        "input_dtype": "torch.float32",
+        "latency_median_ms": 131.81144999999998,
+        "latency_p95_ms": 138.968885,
+        "throughput_samples_per_sec": 7.623246745362798,
+        "latencies_ms": [
+          132.4426,
+          129.8694,
+          123.4578,
+          125.3513,
+          132.1706,
+          138.1088,
+          131.4769,
+          132.146,
+          123.0576,
+          127.2421,
+          126.3735,
+          132.241,
+          132.9662,
+          124.3648,
+          136.6304,
+          127.5036,
+          129.5744,
+          134.2213,
+          125.6872,
+          125.1661,
+          134.4364,
+          138.2469,
+          129.3534,
+          133.4493,
+          139.5596,
+          142.0732,
+          133.8891,
+          131.2464,
+          129.6011,
+          133.4241
+        ],
+        "peak_gpu_memory_bytes": null,
+        "gpu_resident_before_inference_bytes": null,
+        "gpu_transient_bytes": null,
+        "weight_bytes": 102121888,
+        "serialized_model_bytes": 102146382,
+        "measurement": {
+          "warmup": 5,
+          "repeats": 30
+        },
+        "cpu_peak_memory_bytes": null
+      },
+      "comparison": {
+        "comparable": true,
+        "speedup": 1.642078135093727,
+        "memory_reduction_percent": null,
+        "weight_reduction_percent": 0.31153922775787324
+      },
+      "objective_score": 0.6089844195769172
+    },
+    {
+      "method": "quantization",
+      "details": {
+        "quantized_linear_layers": 1,
+        "engine": "onednn",
+        "scope": "Only Linear layers; ResNet convolution weights remain FP32."
+      },
+      "setup_seconds": 0.8309399001300335,
+      "status": "rejected",
+      "validation": {
+        "passed": false,
+        "finite": true,
+        "maximum_absolute_error": 0.20670309104025364,
+        "mean_absolute_error": 0.02531749970172983,
+        "maximum_relative_error": 49156.19686113954,
+        "relative_error_denominator_floor": 1e-08,
+        "class_agreement": 0.985,
+        "accuracy_measured": true,
+        "baseline_accuracy": 0.775,
+        "optimized_accuracy": 0.785,
+        "baseline_correct": 155,
+        "optimized_correct": 157,
+        "validation_examples": 200,
+        "atol": 0.001,
+        "rtol": 0.01,
+        "pass_rule": "Every element: abs(candidate-reference) <= atol + rtol*abs(reference)",
+        "accuracy_note": "Accuracy on supplied labels only.",
+        "accuracy_drop": -0.01,
+        "max_accuracy_drop": 0.01
+      },
+      "metrics": {
+        "device": "cpu",
+        "backend": "pytorch",
+        "precision": "int8-dynamic-linear",
+        "batch_size": 1,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ],
+        "input_dtype": "torch.float32",
+        "latency_median_ms": 221.09949999999998,
+        "latency_p95_ms": 241.54378499999999,
+        "throughput_samples_per_sec": 4.495327287098153,
+        "latencies_ms": [
+          205.4395,
+          213.1985,
+          204.5125,
+          205.6344,
+          223.552,
+          238.0465,
+          237.5648,
+          215.4582,
+          213.1291,
+          218.2749,
+          213.5748,
+          211.4697,
+          226.0465,
+          236.4615,
+          245.47,
+          218.6559,
+          203.9086,
+          226.0585,
+          224.58,
+          222.9799,
+          213.7613,
+          236.1531,
+          244.4052,
+          235.0948,
+          234.5145,
+          223.8766,
+          217.0344,
+          217.3275,
+          219.2191,
+          228.1941
+        ],
+        "peak_gpu_memory_bytes": null,
+        "gpu_resident_before_inference_bytes": null,
+        "gpu_transient_bytes": null,
+        "weight_bytes": 96297044,
+        "serialized_model_bytes": 96397883,
+        "measurement": {
+          "warmup": 5,
+          "repeats": 30
+        },
+        "cpu_peak_memory_bytes": null
+      },
+      "comparison": {
+        "comparable": true,
+        "speedup": 0.9789470351583791,
+        "memory_reduction_percent": null,
+        "weight_reduction_percent": 5.997585030185948
+      }
+    }
+  ],
+  "limitations": [
+    "Accuracy covers only the supplied preprocessed dataset.",
+    "CPU peak inference memory is not measured; weight bytes are a separate metric.",
+    "GPU peak measures PyTorch allocated tensors (weights, input, activations), not total device VRAM or reserved cache.",
+    "Candidates are measured sequentially with only one target model resident on GPU.",
+    "Transformation/setup/compilation excluded from steady-state timing; setup recorded separately.",
+    "Training and inference settings are experimental, not universal optimization guarantees."
+  ],
+  "dataset_sha256": "cb7a0aeeb81ac1bb1a962cb421151e7b6fa3b701c5c56d78519c49f43bc62b3e",
+  "baseline": {
+    "device": "cpu",
+    "backend": "pytorch",
+    "precision": "fp32",
+    "batch_size": 1,
+    "input_shape": [
+      1,
+      3,
+      224,
+      224
+    ],
+    "input_dtype": "torch.float32",
+    "latency_median_ms": 216.4447,
+    "latency_p95_ms": 237.66767499999997,
+    "throughput_samples_per_sec": 4.584352848836818,
+    "latencies_ms": [
+      211.4563,
+      212.6083,
+      213.2469,
+      225.8554,
+      193.5157,
+      199.13,
+      223.906,
+      201.7526,
+      229.7389,
+      245.9001,
+      206.3454,
+      223.5979,
+      217.8034,
+      215.086,
+      227.4587,
+      208.3343,
+      231.3193,
+      211.5693,
+      210.4305,
+      225.5753,
+      229.5887,
+      242.8618,
+      223.2224,
+      227.3062,
+      223.8377,
+      205.5023,
+      209.7226,
+      223.441,
+      212.2458,
+      211.6401
+    ],
+    "peak_gpu_memory_bytes": null,
+    "gpu_resident_before_inference_bytes": null,
+    "gpu_transient_bytes": null,
+    "weight_bytes": 102441032,
+    "serialized_model_bytes": 102541119,
+    "measurement": {
+      "warmup": 5,
+      "repeats": 30
+    },
+    "cpu_peak_memory_bytes": null
+  },
+  "baseline_validation": {
+    "passed": true,
+    "finite": true,
+    "maximum_absolute_error": 0.0,
+    "mean_absolute_error": 0.0,
+    "maximum_relative_error": 0.0,
+    "relative_error_denominator_floor": 1e-08,
+    "class_agreement": 1.0,
+    "accuracy_measured": true,
+    "baseline_accuracy": 0.775,
+    "optimized_accuracy": 0.775,
+    "baseline_correct": 155,
+    "optimized_correct": 155,
+    "validation_examples": 200,
+    "atol": 0.001,
+    "rtol": 0.01,
+    "pass_rule": "Every element: abs(candidate-reference) <= atol + rtol*abs(reference)",
+    "accuracy_note": "Accuracy on supplied labels only."
+  },
+  "selection": {
+    "winner": "onnx",
+    "improved": true,
+    "objective": "latency",
+    "score": 0.6089844195769172,
+    "required_fractional_improvement": 0.01,
+    "reason": "Measured improvement with passing validation.",
+    "caveat": "Single-session measurements; small gains may be timing noise. Repeat independently."
+  },
+  "created_at_utc": "2026-10-31T20:14:32.420916+00:00",
+  "run_directory": "results\\resnet50-cpu\\20261031T201205Z-4d2b2272"
+}

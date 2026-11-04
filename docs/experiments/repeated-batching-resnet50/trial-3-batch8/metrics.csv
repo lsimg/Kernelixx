@@ -1,0 +1,2 @@
+method,status,device,backend,precision,batch_size,input_dtype,latency_median_ms,latency_p95_ms,throughput_samples_per_sec,peak_gpu_memory_bytes,gpu_resident_before_inference_bytes,gpu_transient_bytes,weight_bytes,serialized_model_bytes,cpu_peak_memory_bytes
+baseline,ok,cuda:0,pytorch,fp32,8,torch.float32,23.7773,29.428945,326.1665039231715,225388032,141895168,83492864,102441032,102545599,

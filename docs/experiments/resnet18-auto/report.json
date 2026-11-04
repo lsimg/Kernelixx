@@ -1,0 +1,355 @@
+{
+  "schema_version": 1,
+  "experiment": "inference",
+  "hardware": {
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+    "versions": {
+      "torch": "2.9.1",
+      "torchvision": "0.24.1",
+      "numpy": "2.2.6",
+      "onnx": "1.23.2",
+      "onnxruntime": "1.31.1",
+      "rich": "14.2.0"
+    },
+    "torch_runtime_version": "2.9.1+cpu",
+    "driver_visible_gpus": [
+      {
+        "name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "driver": "591.91",
+        "total_memory_mib": 8188
+      }
+    ],
+    "cuda_available": false,
+    "torch_cuda": null,
+    "gpu": null,
+    "cpu_threads": 1,
+    "quantized_engines": [
+      "onednn"
+    ]
+  },
+  "config": {
+    "model": "resnet18",
+    "weights": "none",
+    "device": "cpu",
+    "input_shape": [
+      1,
+      3,
+      224,
+      224
+    ],
+    "seed": 42,
+    "threads": 1,
+    "validation_batches": 3,
+    "dataset": null,
+    "objective": "latency",
+    "min_improvement": 0.01,
+    "max_accuracy_drop": 0.01,
+    "task": "auto"
+  },
+  "timing": {
+    "warmup": 5,
+    "repeats": 30
+  },
+  "model": {
+    "name": "resnet18",
+    "architecture": "ResNet",
+    "weights": "none",
+    "parameters": 11689512,
+    "trainable_parameters": 11689512,
+    "architecture_repr": "ResNet(\n  (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)\n  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n  (relu): ReLU(inplace=True)\n  (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)\n  (layer1): Sequential(\n    (0): BasicBlock(\n      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n    )\n    (1): BasicBlock(\n      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n    )\n  )\n  (layer2): Sequential(\n    (0): BasicBlock(\n      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)\n      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (downsample): Sequential(\n        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)\n        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      )\n    )\n    (1): BasicBlock(\n      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n    )\n  )\n  (layer3): Sequential(\n    (0): BasicBlock(\n      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)\n      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (downsample): Sequential(\n        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)\n        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      )\n    )\n    (1): BasicBlock(\n      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n    )\n  )\n  (layer4): Sequential(\n    (0): BasicBlock(\n      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)\n      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (downsample): Sequential(\n        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)\n        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      )\n    )\n    (1): BasicBlock(\n      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n      (relu): ReLU(inplace=True)\n      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)\n      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n    )\n  )\n  (avgpool): AdaptiveAvgPool2d(output_size=(1, 1))\n  (fc): Linear(in_features=512, out_features=1000, bias=True)\n)"
+  },
+  "validation_task": "classification",
+  "warnings": [],
+  "candidates": [
+    {
+      "method": "onnx",
+      "details": {
+        "export_path": "results\\20261031T162530Z-7136aa3c\\onnx\\model.onnx",
+        "opset": 17,
+        "graph_optimization": "ORT_ENABLE_ALL",
+        "note": "Export and session creation excluded from steady-state latency."
+      },
+      "setup_seconds": 0.9424511999823153,
+      "status": "ok",
+      "validation": {
+        "passed": true,
+        "finite": true,
+        "maximum_absolute_error": 2.2649765014648438e-06,
+        "mean_absolute_error": 3.7022649000088375e-07,
+        "maximum_relative_error": 0.0022524124522844205,
+        "relative_error_denominator_floor": 1e-08,
+        "class_agreement": 1.0,
+        "accuracy_measured": false,
+        "baseline_accuracy": null,
+        "optimized_accuracy": null,
+        "validation_examples": 3,
+        "atol": 0.001,
+        "rtol": 0.01,
+        "pass_rule": "Every element: abs(candidate-reference) <= atol + rtol*abs(reference)",
+        "accuracy_note": "Real task accuracy was not measured. Output similarity is not accuracy."
+      },
+      "metrics": {
+        "device": "cpu",
+        "backend": "onnxruntime/cpu",
+        "precision": "fp32",
+        "batch_size": 1,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ],
+        "input_dtype": "torch.float32",
+        "latency_median_ms": 38.177350000000004,
+        "latency_p95_ms": 40.047705,
+        "throughput_samples_per_sec": 26.05666508213191,
+        "latencies_ms": [
+          38.1213,
+          37.199,
+          37.9537,
+          37.7128,
+          37.5799,
+          37.2384,
+          39.2086,
+          38.283,
+          39.9789,
+          38.0395,
+          38.7525,
+          38.9957,
+          40.104,
+          40.2338,
+          39.5554,
+          37.7731,
+          37.2397,
+          38.3347,
+          37.6472,
+          37.6372,
+          38.2334,
+          38.5109,
+          38.8585,
+          37.9406,
+          39.0419,
+          37.3056,
+          38.8398,
+          37.8999,
+          37.6366,
+          39.4813
+        ],
+        "peak_gpu_memory_bytes": null,
+        "gpu_resident_before_inference_bytes": null,
+        "gpu_transient_bytes": null,
+        "weight_bytes": 46723488,
+        "serialized_model_bytes": 46733674,
+        "measurement": {
+          "warmup": 5,
+          "repeats": 30
+        },
+        "cpu_peak_memory_bytes": null
+      },
+      "comparison": {
+        "comparable": true,
+        "speedup": 1.9845523589248597,
+        "memory_reduction_percent": null,
+        "weight_reduction_percent": 0.15625064107210873
+      },
+      "objective_score": 0.5038919711555278
+    },
+    {
+      "method": "quantization",
+      "details": {
+        "quantized_linear_layers": 1,
+        "engine": "onednn",
+        "scope": "Only Linear layers; ResNet convolution weights remain FP32."
+      },
+      "setup_seconds": 0.2398065000306815,
+      "status": "rejected",
+      "validation": {
+        "passed": false,
+        "finite": true,
+        "maximum_absolute_error": 0.03981423377990723,
+        "mean_absolute_error": 0.0078093475780139365,
+        "maximum_relative_error": 206.78282002039026,
+        "relative_error_denominator_floor": 1e-08,
+        "class_agreement": 0.3333333333333333,
+        "accuracy_measured": false,
+        "baseline_accuracy": null,
+        "optimized_accuracy": null,
+        "validation_examples": 3,
+        "atol": 0.001,
+        "rtol": 0.01,
+        "pass_rule": "Every element: abs(candidate-reference) <= atol + rtol*abs(reference)",
+        "accuracy_note": "Real task accuracy was not measured. Output similarity is not accuracy."
+      },
+      "metrics": {
+        "device": "cpu",
+        "backend": "pytorch",
+        "precision": "int8-dynamic-linear",
+        "batch_size": 1,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ],
+        "input_dtype": "torch.float32",
+        "latency_median_ms": 75.3749,
+        "latency_p95_ms": 79.75864999999999,
+        "throughput_samples_per_sec": 13.166027068386144,
+        "latencies_ms": [
+          73.5851,
+          75.0442,
+          78.1559,
+          79.7798,
+          74.3332,
+          73.2177,
+          74.3954,
+          78.0573,
+          78.1522,
+          79.7328,
+          80.6536,
+          78.5985,
+          72.2002,
+          73.6794,
+          73.7352,
+          76.3618,
+          79.5446,
+          76.7607,
+          75.6242,
+          73.7424,
+          76.1609,
+          74.8708,
+          74.8706,
+          75.1256,
+          76.1654,
+          73.1973,
+          73.7048,
+          73.8934,
+          77.9359,
+          77.3128
+        ],
+        "peak_gpu_memory_bytes": null,
+        "gpu_resident_before_inference_bytes": null,
+        "gpu_transient_bytes": null,
+        "weight_bytes": 45260620,
+        "serialized_model_bytes": 45299847,
+        "measurement": {
+          "warmup": 5,
+          "repeats": 30
+        },
+        "cpu_peak_memory_bytes": null
+      },
+      "comparison": {
+        "comparable": true,
+        "speedup": 1.0051747995685567,
+        "memory_reduction_percent": null,
+        "weight_reduction_percent": 3.2822635349980867
+      }
+    },
+    {
+      "method": "compile",
+      "status": "skipped",
+      "reason": "Inductor CPU on Windows requires an available MSVC C++ toolchain (cl.exe)"
+    },
+    {
+      "method": "fp16",
+      "status": "skipped",
+      "reason": "FP16 inference requires CUDA; CPU FP16 is deliberately unsupported"
+    }
+  ],
+  "limitations": [
+    "Synthetic inputs measure performance and output deviation, not real accuracy.",
+    "CPU peak inference memory is not measured; weight bytes are a separate metric.",
+    "GPU peak measures PyTorch allocated tensors (weights, input, activations), not total device VRAM or reserved cache.",
+    "Candidates are measured sequentially with only one target model resident on GPU.",
+    "Transformation/setup/compilation excluded from steady-state timing; setup recorded separately.",
+    "Training and inference settings are experimental, not universal optimization guarantees."
+  ],
+  "baseline": {
+    "device": "cpu",
+    "backend": "pytorch",
+    "precision": "fp32",
+    "batch_size": 1,
+    "input_shape": [
+      1,
+      3,
+      224,
+      224
+    ],
+    "input_dtype": "torch.float32",
+    "latency_median_ms": 75.76495,
+    "latency_p95_ms": 87.29494,
+    "throughput_samples_per_sec": 12.884539068499365,
+    "latencies_ms": [
+      92.8413,
+      85.8419,
+      87.0723,
+      87.4771,
+      84.961,
+      80.6102,
+      82.6893,
+      80.4831,
+      81.5485,
+      80.4389,
+      76.9963,
+      75.9611,
+      73.4734,
+      73.9631,
+      75.5688,
+      73.8579,
+      74.5197,
+      75.153,
+      69.6745,
+      72.6195,
+      73.6933,
+      76.1016,
+      72.5828,
+      74.3944,
+      78.2039,
+      70.6703,
+      72.7217,
+      72.9727,
+      78.1836,
+      73.0968
+    ],
+    "peak_gpu_memory_bytes": null,
+    "gpu_resident_before_inference_bytes": null,
+    "gpu_transient_bytes": null,
+    "weight_bytes": 46796608,
+    "serialized_model_bytes": 46835019,
+    "measurement": {
+      "warmup": 5,
+      "repeats": 30
+    },
+    "cpu_peak_memory_bytes": null
+  },
+  "baseline_validation": {
+    "passed": true,
+    "finite": true,
+    "maximum_absolute_error": 0.0,
+    "mean_absolute_error": 0.0,
+    "maximum_relative_error": 0.0,
+    "relative_error_denominator_floor": 1e-08,
+    "class_agreement": 1.0,
+    "accuracy_measured": false,
+    "baseline_accuracy": null,
+    "optimized_accuracy": null,
+    "validation_examples": 3,
+    "atol": 0.001,
+    "rtol": 0.01,
+    "pass_rule": "Every element: abs(candidate-reference) <= atol + rtol*abs(reference)",
+    "accuracy_note": "Real task accuracy was not measured. Output similarity is not accuracy."
+  },
+  "selection": {
+    "winner": "onnx",
+    "improved": true,
+    "objective": "latency",
+    "score": 0.5038919711555278,
+    "required_fractional_improvement": 0.01,
+    "reason": "Measured improvement with passing validation.",
+    "caveat": "Single-session measurements; small gains may be timing noise. Repeat independently."
+  },
+  "created_at_utc": "2026-10-31T16:25:43.811407+00:00",
+  "run_directory": "results\\20261031T162530Z-7136aa3c"
+}
