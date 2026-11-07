@@ -1,5 +1,8 @@
 # How Kernelixx works
 
+This document records the original 0.1 architecture. Current streaming, pipeline
+and repeatability contracts are in [ARCHITECTURE_V2.md](ARCHITECTURE_V2.md).
+
 Kernelixx is a local Python CLI for controlled inference experiments. A run takes
 one original model and a fixed input workload, evaluates independent optimization
 candidates, validates their outputs and selects a measured improvement when one

@@ -191,3 +191,86 @@ Gemma and Ollama were investigated as possible text-model experiments. The GGUF
 CPU runner adds a limited native text benchmark, but does not implement an Ollama
 adapter, Gemma-specific formatting, GPU GGUF, exact KV-cache allocation accounting
 or logit-level LLM correctness validation. These remain explicit future work.
+
+## V2 modernization — 2026-11-07
+
+The preceding sections describe historical releases. Current work starts from the
+verified 161-member Kernelixx source ZIP, not from a newly scaffolded project.
+Archive provenance and the unchanged baseline are recorded in
+[INITIAL_TECHNICAL_AUDIT.md](INITIAL_TECHNICAL_AUDIT.md). The original archives and
+historical numerical evidence were preserved. The initial local suite had 90
+passing tests. The first test invocation hit sandbox temporary-directory access
+errors; explicit workspace temporary locations resolved those fixture errors.
+
+| Stage | Files / delivered change | Verification and remaining boundary |
+|---|---|---|
+| 0. Archive/audit | INITIAL_TECHNICAL_AUDIT.md, safely extracted `.audit/original` | CRC/path checks, SHA-256, all 161 source files matched; no source archive overwritten |
+| 1. Architecture | ARCHITECTURE_V2.md | Existing package/modules extended; no GUI/server or unnecessary adapter hierarchy |
+| 2. Memory | core/memory.py, core/benchmark.py, optimizer.py, optional dependency extras | Scoped RSS/delta/lifetime peak, CUDA allocated/reserved/transient; real CPU/CUDA tests; NVML absent, process VRAM unavailable |
+| 3. Streaming | core/data.py, validator.py, optimizer.py | NPZ spooling/NPY mmap, per-region unmapping, ordered/tail batches, chunked scalar validation; legacy list helpers retained |
+| 4. Pipelines | core/pipeline.py, optimizer.py, fusion.py, quantization.py | Preflight before copying; FP16→compile and ONNX→dynamic INT8; explicit failures/skips; no exhaustive search |
+| 5. Benchmarking | core/benchmark.py, core/repeat.py, reporting/reporter.py | Cold/setup/steady scopes, fresh workers, alternating pairs, source/input hashes, resource constraints and ACCEPT/REJECT/INCONCLUSIVE |
+| 6. GGUF | llm/gguf.py, llm/reporting.py | Real local template rendering, prompt evaluation, token/text/logit checks, strict task checks, batch/KV/offload controls; GPU llama.cpp unavailable |
+| 7. Triton | OPTIMIZATION_METHODS.md | Deferred: no demonstrated specialized-kernel advantage or compatible installed Triton; no placeholder kernel |
+| 8. Model contracts | Existing loader, runner, numerical/classification validation; separate GGUF contract | ResNet/custom/GGUF compatibility retained; detection/transformer and arbitrary structured-output adapters deferred |
+| 9. Export | core/export.py | Checksummed ONNX or source-state/execution recipes, native GGUF config, actual reload+complete validation; failed exports remain unverified |
+| 10. CLI | cli.py | profile-memory, optimize-pipeline, benchmark-repeat, optimize-llm, export; help/config errors/exit codes/report reading tested; old commands retained |
+| 11. Regression | tests/test_v2.py plus unchanged existing tests | Real CPU/CUDA/ORT/GGUF integration; focused chunk/tail/error/resource/checksum tests; see current counts in PERFORMANCE_RESULTS.md |
+| 12. Measurements | tools/compare_implementations.py, preserved local results and curated evidence | Same hardware/weights/data and alternating fresh processes; negative observations retained, no invented speedup |
+| 13. Documentation | READMEs, V2/memory/methodology/methods/LLM/results docs | Current behavior separated from historical evidence; limitations and unverified backends explicit |
+
+Two measurements corrected implementation assumptions. The first ONNX INT8 chain
+failed its unchanged numerical test; reduced-range per-channel weights addressed
+the observed large x86 error without relaxing validation. The first full-system
+streaming experiment increased RSS because touched whole-file mmap pages remained
+resident. Mapping/copying/unmapping one region at a time reduced that working-set
+cost. Both attempts were retained instead of presenting only successful results.
+Cold-forward and steady-state scope ordering was also corrected, but the measured
+GPU latency regression remained; its hardware/runtime cause is not established.
+
+No general inference-speed improvement is inferred from lower data memory. FP16
+can remain rejected numerically even when it is faster. Strict expected-answer
+checks can fail while token and native-logit consistency pass. The CPU-only
+llama.cpp build cannot verify offload despite a CUDA-capable PyTorch installation.
+Exact KV-cache byte accounting, inference recomputation, backward checkpointing,
+custom Triton kernels, generic task adapters, GPU ORT and statistical LLM selection
+remain explicit future work, not completed features.
+
+Final timing follow-up: raw GPU sequences drifted substantially even with a
+larger warmup count. Added first/last-third drift diagnostics, a nullable verified
+steady-state field and INCONCLUSIVE selection for unstable/insufficient timings.
+Re-ran the CPU ONNX search with ten warmup calls: all three pairs passed numerical
+and drift gates, median latency ratio 2.53337×; actual selected artifact reload
+passed again. Final suite: 124 passed, no skips, including the real local GGUF test.
+Source/wheel/sdist byte-content audits and target-installed wheel smoke checks
+are separate from source tests; original archives remain unchanged.
+
+## Supplied SoupLite reference archive — 2026-11-08
+
+The user subsequently supplied GPU-KERNEL.zip. Audited all 35,020 archive entries
+and full CRC; excluded 257 symlinks. Identified souplite-v5-memory as the primary
+reference by launcher/docs and byte-identical solution files in its verified
+evidence ZIP. Reconciled both saved result/checks/source digests without treating
+historical T4 numbers as current Kernelixx measurements. Selected CPU chunked-loss
+tests passed (9); the T4 training workload was not rerun on the 8 GB laptop.
+
+The concrete transferable reliability pattern was source/check freshness. A new
+regression reproduced export accepting a changed forward with identical weights.
+Added direct model/factory and Kernelixx package source fingerprints to reports,
+PyTorch recipes and independent worker comparisons. Export/reload now reject known
+source changes; legacy provenance remains explicitly unverified. The existing
+streaming architecture stayed in place; no SoupLite kernel, web app, Qwen hooks
+or inference recomputation was transplanted. Full reconciliation and limits:
+[SOUPLITE_REFERENCE_AUDIT.md](SOUPLITE_REFERENCE_AUDIT.md).
+
+## GitHub architecture publication — 2026-11-08
+
+Added a detailed Russian before/after migration guide with subsystem tables and
+workflow/memory/worker/GGUF/export diagrams. Retained the user's subsequent CPU
+ONNX experiment and successful reload in a separate normalized evidence JSON
+(median three-pair ratio 2.448037, not pooled with development measurements).
+Corrected CPU RSS rounding to 8.83% and clarified that CUDA-scenario RSS savings
+are process RAM, not VRAM. Public log copies redact local workspace paths; raw
+local evidence and original archives remain unchanged. A separate LF-normalized
+source checkout passed all 127 tests before publication. Remote CI status belongs
+to the published commit and is not inferred from that local result.

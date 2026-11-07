@@ -2,12 +2,14 @@
 
 [![Tests](https://github.com/lsimg/Kernelixx/actions/workflows/tests.yml/badge.svg)](https://github.com/lsimg/Kernelixx/actions/workflows/tests.yml)
 
-[Русская инструкция](README.ru.md) · [Architecture](docs/ARCHITECTURE.md) ·
+[Русская инструкция](README.ru.md) · [Architecture V2](docs/ARCHITECTURE_V2.md) ·
+[Before/after architecture guide](docs/MIGRATION_V2.ru.md) ·
 [Development stages and engineering decisions](docs/DEVELOPMENT_HISTORY.md) ·
 [Changelog](CHANGELOG.md) · [Measured evidence](docs/VALIDATION.md)
 
-A Python CLI for profiling, transforming, validating, and benchmarking existing
-PyTorch models, with a separate optional native GGUF CPU benchmark. Kernelixx measures each PyTorch candidate against the unmodified model
+An adaptive neural network optimization framework for the terminal: profiling,
+compatible transformation chains, streaming validation and independent paired
+benchmarks, with optional local native GGUF experiments. Kernelixx measures each PyTorch candidate against the unmodified model
 and retains the baseline when no validated candidate improves the chosen metric.
 There is no web server, GUI, or hosted service.
 
@@ -20,19 +22,67 @@ presented as a fabricated Git commit history.
 
 ```mermaid
 flowchart LR
-    A[Model and fixed inputs] --> B[Measure original model]
-    B --> C[Try compatible transformations]
-    C --> D[Compare outputs and optional labels]
-    D --> E[Measure candidates under the same conditions]
-    E --> F[Choose validated improvement or retain baseline]
-    F --> G[Terminal table and JSON / Markdown / CSV]
+    A[Model and repeatable batch stream] --> B[Baseline and disk-backed references]
+    B --> C[Compatible transforms or chains]
+    C --> D[Numerical and optional labeled checks]
+    D --> E[Independent paired workers and drift checks]
+    E --> F[ACCEPT or retain baseline]
+    F --> G[Reports and optional reload-verified export]
 ```
 
 An optimization is successful only when it passes the configured correctness
 policy and improves the selected objective by the required margin. Converting a
 model successfully, agreeing on a few classes, or reducing weight storage alone
 does not satisfy every objective. Full data flow, module contracts, formulas and
-failure handling are described in [ARCHITECTURE.md](docs/ARCHITECTURE.md).
+failure handling are described in [ARCHITECTURE_V2.md](docs/ARCHITECTURE_V2.md).
+The [before/after guide](docs/MIGRATION_V2.ru.md) explains every changed subsystem,
+its workflow, practical benefit and remaining limitations with diagrams.
+
+## V2 modernization and reproducible commands
+
+The [archive audit](docs/INITIAL_TECHNICAL_AUDIT.md) establishes provenance and
+confirmed allocation costs. [Current results](docs/PERFORMANCE_RESULTS.md)
+separate measured improvements, regressions and unverified features.
+
+Current local verification: 127 tests pass, including real CUDA/ORT/GGUF. In the
+three-pair pretrained ResNet50 comparison, median whole-experiment RSS fell by
+8.83% on CPU and 4.60% in the CUDA workload with unchanged 155/200 labeled predictions. These are process RAM reductions, not VRAM savings. GPU
+timings drifted and do not establish steady-state speedup. A separate synthetic
+ResNet18 CPU ONNX pipeline passed all stability/numerical gates with a 2.53× median
+paired speedup; this is not a task-accuracy result. See the linked report for scope.
+The user's subsequent run independently accepted ONNX at a 2.45× median paired
+ratio and verified export/reload; [its retained measurements](docs/experiments/manual-demo-20261108.json)
+remain separate from the development session.
+
+```bash
+python -m pip install -e ".[onnx,memory,dev]"
+python -m kernelixx profile-memory --model resnet18 --device cuda
+python -m kernelixx optimize-pipeline --model resnet18 --device cpu --pipelines onnx onnx+quantization --max-candidates 2 --trials 3 --output results/pipeline
+python -m kernelixx benchmark-repeat --model resnet18 --device cuda --pipeline fp16 --trials 3
+python -m kernelixx optimize-llm --model-file model.gguf --threads 1 4 --prompt-format auto --n-batch 256 --n-ubatch 64 --validate-logits
+python -m kernelixx export --run-dir results/pipeline/latest --output results/exported-model
+python -m pytest -q
+```
+
+Each command has `--help`; old commands remain available. Use a new export
+directory. Export succeeds only after actual reload and validation. Set
+`KERNELIXX_TEST_GGUF_MODEL` to a real local model for native GGUF integration tests;
+otherwise those tests explicitly skip. Mock tests do not establish GPU support.
+
+Large datasets accept an NPZ or directory with float32 `inputs.npy` and int64
+`labels.npy`. Batch size comes from `--input-shape`; `--validation-chunk-elements`
+bounds numerical scratch work. Input order and incomplete tail batches are kept.
+NPZ/reference streaming requires temporary disk capacity.
+
+[Architecture V2](docs/ARCHITECTURE_V2.md) ·
+[Methods and export](docs/OPTIMIZATION_METHODS.md) ·
+[Memory profiling](docs/MEMORY_PROFILING.md) ·
+[Benchmark methodology](docs/BENCHMARK_METHODOLOGY.md) ·
+[LLM settings](docs/LLM_OPTIMIZATION.md).
+
+The subsequently supplied `GPU-KERNEL.zip` contains SoupLite, not Kernelixx.
+Its code/evidence reconciliation and the targeted source-freshness fix are
+documented in [the reference audit](docs/SOUPLITE_REFERENCE_AUDIT.md).
 
 ## Development stages
 
@@ -52,6 +102,7 @@ failure handling are described in [ARCHITECTURE.md](docs/ARCHITECTURE.md).
 | 12. User images | Explicit image paths, top-5 predictions, static reports | Seven apple screenshots; class-vocabulary limits documented |
 | 13. Public release | Kernelixx rename, consistent imports/CLI, publication docs | Revalidated tests and rebuilt distributions |
 | 14. GGUF text models | Native CPU runner, thread comparison, first-token/decode timing and sampled RSS | Supplied SmolLM2 Q4_K_M; exact token agreement; raw responses retained |
+| 15. Adaptive experiment pipeline | Streaming data/validation, distinct memory metrics, compatible chains, independent confirmation and verified export | 127 local tests; numerical/drift/resource policies; before/after architecture and negative evidence documented |
 
 See [DEVELOPMENT_HISTORY.md](docs/DEVELOPMENT_HISTORY.md) for the reasons behind
 each change, what failed, and which observations support the results. Gemma and
@@ -111,9 +162,10 @@ examples/                   custom model and synthetic NPZ examples
 results/                    generated local experiment artifacts (gitignored)
 ```
 
-Each candidate starts from a copy of the same original CPU model. Only one target
-model is resident on the GPU at a time. Baseline validation outputs are stored on
-CPU before the baseline runner is released. Transformations are not composed.
+Each compatible candidate starts from an independent original CPU model. Only one
+target model is resident on GPU. Dataset batches and baseline outputs are streamed
+through temporary disk storage. Supported chains include FP16→compile and
+ONNX→dynamic INT8. See [V2 architecture](docs/ARCHITECTURE_V2.md).
 
 ## Installation
 
@@ -293,14 +345,17 @@ peak inference memory.
 model and inputs resident, including the inference output. It excludes CUDA context,
 non-PyTorch allocations, reserved allocator cache and other processes. Resident
 memory before execution and transient allocation delta are reported separately.
-PyTorch CPU peak memory is `null`: process RSS and Python tracemalloc would not give a
-comparable isolated tensor-allocation metric. Memory objectives do not silently
-substitute weight size when peak memory is unavailable.
+Exact PyTorch CPU peak memory remains `null`. `sampled_peak_ram_bytes` and scoped
+`memory` fields separately report process RSS, delta, OS lifetime peak, CUDA
+allocated/reserved peaks and optional NVML process VRAM. Sampling can miss short
+peaks. Memory objectives do not substitute weight size or noisy RSS for an
+unavailable allocator metric. See [memory definitions](docs/MEMORY_PROFILING.md).
 
 Profiler results come from a separate untimed inference; self CPU/device time
 rankings indicate potential bottlenecks and do not prove an optimization will help.
 Conversion, input transfers and compilation are excluded from steady-state latency;
-candidate `setup_seconds` records transformation and initial execution separately.
+candidate `setup_seconds` records transformation/session construction, while
+`cold_start_latency_ms` records the first forward including lazy compilation.
 ORT dispatch and its zero-copy CPU input / Tensor output wrapping are included.
 
 ### Automatic selection
@@ -316,8 +371,10 @@ Baseline normalized score is 1; a candidate must improve by more than
 
 Lower is better. Memory and balanced require measured GPU peak allocation; on CPU,
 selection explicitly reports that the objective cannot be evaluated. These are
-single-session decisions, not statistical significance claims. Repeat independent
-runs and inspect distributions, especially for small apparent improvements.
+single-session scores, not statistical significance claims. Single-session CLI
+gains remain provisional and retain baseline. `optimize-pipeline` requires at
+least three independent pairs with improvement in every pair; mixed or
+insufficient evidence is INCONCLUSIVE.
 
 ## Validation and labeled data
 
@@ -597,10 +654,11 @@ and a separate cross-batch numerical check.
 - No PyTorch CPU allocation-peak measurement, energy/cost meter, training optimizer for arbitrary
   networks or universal model support. The included downloader is specifically for
   the documented Imagenette experiment, rather than an arbitrary dataset service.
-- GGUF text generation is an optional CPU benchmark with its own metrics and token
-  policy. Gemma-specific support, Ollama, GPU GGUF and logit-level LLM comparison
-  remain future work. The PyTorch custom-model contract still requires one floating
-  input/output Tensor and does not load GGUF files.
+- GGUF provides metadata templates, prompt/decode metrics, explicit task checks
+  and optional prompt-logit validation. Offload is capability-gated and NOT
+  VERIFIED on the inspected CPU-only llama.cpp build. Exact KV allocation and
+  independent LLM winner confirmation remain future work. No Ollama integration or dependency is introduced.
+  The PyTorch contract remains one floating Tensor input/output.
 - Reports describe the tested workload. They do not establish superiority over
   existing optimization tools, production accuracy, or statistically significant gains.
 
@@ -634,7 +692,8 @@ To install a wheel after choosing the CPU or CUDA PyTorch pair:
 The [historical release validation](docs/RELEASE_VALIDATION.md) records an isolated Python 3.12
 CPU installation, nine installed-wheel checks from outside the checkout, and
 59 passing source-distribution tests with three CUDA-only skips. The existing
-CUDA development suite now has 90 passing tests. The renamed release is checked
+original CUDA development suite had 90 passing tests. Current verification is in
+[PERFORMANCE_RESULTS.md](docs/PERFORMANCE_RESULTS.md). The renamed release was checked
 again as described in [PUBLICATION.md](docs/PUBLICATION.md). The CI matrix builds
 and checks the installed wheel on Windows/Linux with Python 3.11/3.12. Remote
 workflow status can be inspected in the repository's Actions tab; local results
@@ -651,7 +710,8 @@ explains why the four-thread setting is the candidate for these follow-ups.
 
 PyTorch follow-ups include torchao/ONNX static INT8 with representative calibration,
 ORT CUDA with I/O binding and an explicit GPU memory instrument, compiler evidence
-for fusion, task-specific validation adapters and portable model artifacts.
+for fusion, task-specific validation adapters and portability beyond the current
+ONNX graphs, state checkpoints and runtime recipes.
 
 ## Technical references
 

@@ -54,7 +54,7 @@ def cleanup(device: torch.device) -> None:
 
 def system_info() -> dict[str, Any]:
     versions = {}
-    for package in ("torch", "torchvision", "numpy", "onnx", "onnxruntime", "rich"):
+    for package in ("torch", "torchvision", "numpy", "onnx", "onnxruntime", "rich", "psutil", "nvidia-ml-py", "llama-cpp-python"):
         try:
             versions[package] = importlib.metadata.version(package)
         except importlib.metadata.PackageNotFoundError:

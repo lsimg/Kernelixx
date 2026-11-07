@@ -1,5 +1,40 @@
 # Changelog
 
+## Unreleased — architecture comparison and publication, 2026-11-08
+
+- Added a detailed before/after architecture guide with diagrams and measured costs.
+- Retained a separate user-executed three-pair ONNX demo and verified export.
+- Normalized public workspace paths, clarified RAM/VRAM boundaries and checked the
+  LF-normalized publication source with the full 127-test suite.
+
+## Unreleased — supplied SoupLite reference, 2026-11-08
+
+- Audited the subsequently supplied GPU-KERNEL.zip, identified the primary
+  SoupLite memory package, verified saved evidence/source hashes and ran selected
+  CPU chunked-loss checks. Historical T4 figures remain separate from Kernelixx.
+- Added Python source fingerprints to reject stale exports/PyTorch recipes and
+  changed source across independent workers, including unchanged-weight cases.
+- Preserved legacy reports with explicit unverified historical source provenance;
+  no SoupLite kernels, training hooks, web application or dependencies transplanted.
+
+## Unreleased — adaptive pipeline and memory modernization, 2026-11-07
+
+- Audited the source ZIP and preserved the byte-identical original for comparison.
+- Added scoped process RSS and distinct CUDA allocated/reserved/transient metrics,
+  with optional NVML process VRAM and explicit missing-source semantics.
+- Streamed NPZ/NPY datasets and reference outputs; bounded numerical scratch work
+  and released consumed mmap regions on Windows. Kept legacy list APIs.
+- Removed model-sized BytesIO serialization and redundant owned-model INT8 copies.
+- Added compatible FP16→compile and ONNX→dynamic Linear INT8 chains, bounded search,
+  isolated alternating paired trials and conservative acceptance/resource policies.
+- Added separate cold/setup/steady/end-to-end timing and preserved raw observations.
+- Extended native GGUF configuration, metadata templates, prompt throughput, optional
+  prompt-logit and explicit task-answer checks. Local GPU offload remains unverified.
+- Added checksummed ONNX/PyTorch execution recipes and local GGUF configuration
+  export, with actual runtime reload validation before reporting success.
+- Added CLI commands, regression/integration tests and V2 methodology/results docs.
+- Retained negative results; lower data memory does not imply faster GPU inference.
+
 ## Unreleased — GGUF CPU text-model benchmark, 2026-11-04
 
 - Added a per-prompt analysis derived from the preserved measurements, a Russian

@@ -1,0 +1,90 @@
+{
+  "archive": "GPU-KERNEL.zip",
+  "archive_sha256": "b1d1483bc51403327640a11884ccdce9b5f4ab4ad0bf63d5f17b57917b07d3ac",
+  "archive_bytes": 196732511,
+  "entries": 35020,
+  "uncompressed_bytes": 537579535,
+  "crc_ok": true,
+  "symlinks_excluded": 257,
+  "unsafe_traversal_paths": 0,
+  "primary_reference": "GPU-KERNEL/souplite-v5-memory/",
+  "solution_sha256": "3aef660ecf056fd1966778802dddd5ee455a10f69c6edc7c5c293cdc98ca32dd",
+  "solution_python_files_matching_verified_zip": 15,
+  "historical_evidence": [
+    {
+      "series": "original",
+      "nested_archive_sha256": "15e8f3eba89e47a902e671ff7f33d644d099b97a943a257ec42f22bd2b843f0b",
+      "result_sha256": "8ae168941c5c8a7becf74828bf38464d71aaaa35dd27a5c502d98b9728608b9b",
+      "result_hash_matches_checks": true,
+      "solution_hash_matches": true,
+      "passed_checks": 10,
+      "summary": {
+        "base": {
+          "ok": true,
+          "runs": 2,
+          "wall_s": 84.41,
+          "gpu_peak_mib": 14345,
+          "train_loop_s": 59.03,
+          "eval_loss": 2.04966
+        },
+        "solution": {
+          "ok": true,
+          "runs": 2,
+          "wall_s": 83.11,
+          "gpu_peak_mib": 8603,
+          "train_loop_s": 61.42,
+          "eval_loss": 2.04967
+        },
+        "ratios": {
+          "speedup": 1.0156,
+          "memory_ratio": 1.6674,
+          "quality_delta_pct": 0.0
+        }
+      }
+    },
+    {
+      "series": "additional",
+      "nested_archive_sha256": "d9e3aa5e5e3f4da1abb1b0d7bc23785925956afc06afb62718255066a5209955",
+      "result_sha256": "89fb868f81afb4b78c6f95dda72f83150d4608004c9c4c1512d2daa67edac4a7",
+      "result_hash_matches_checks": true,
+      "solution_hash_matches": true,
+      "passed_checks": 10,
+      "summary": {
+        "base": {
+          "ok": true,
+          "runs": 2,
+          "wall_s": 83.93,
+          "gpu_peak_mib": 14345,
+          "train_loop_s": 56.82,
+          "eval_loss": 2.04964
+        },
+        "solution": {
+          "ok": true,
+          "runs": 2,
+          "wall_s": 78.82,
+          "gpu_peak_mib": 8603,
+          "train_loop_s": 57.26,
+          "eval_loss": 2.04967
+        },
+        "ratios": {
+          "speedup": 1.0648,
+          "memory_ratio": 1.6674,
+          "quality_delta_pct": 0.001
+        }
+      }
+    }
+  ],
+  "reference_cpu_tests": {
+    "passed": 9,
+    "deselected_gpu_cases": 2,
+    "gpu_execution_verified": false
+  },
+  "kernelixx_tests": {
+    "passed": 127,
+    "skipped": 0,
+    "warnings": 14,
+    "elapsed_seconds": 50.5
+  },
+  "transferred_pattern": "Recorded source fingerprints / rejection of stale execution recipes; no kernels copied",
+  "measurement_scope": "Saved SoupLite T4 evidence only, not a new Kernelixx or local T4 benchmark"
+}

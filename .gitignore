@@ -14,6 +14,7 @@ results/*
 .agents/
 .codex/
 .aws/
+.audit/
 *.pth
 *.pt
 *.onnx
