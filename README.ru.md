@@ -1,6 +1,7 @@
 # Kernelixx
 
-[English README](README.md) · [Как устроен код](docs/ARCHITECTURE.md) ·
+[English README](README.md) · [Архитектура V2](docs/ARCHITECTURE_V2.md) ·
+[Подробно: что было и что стало](docs/MIGRATION_V2.ru.md) ·
 [Все этапы и улучшения](docs/DEVELOPMENT_HISTORY.md) · [История изменений](CHANGELOG.md)
 
 Kernelixx — программа для терминала, которая проверяет, можно ли запускать
@@ -11,6 +12,61 @@ Kernelixx — программа для терминала, которая пр�
 Проект предназначен для инженерных экспериментов и воспроизводимых измерений.
 Веб-сайта, графического приложения и сервера в нём нет. Картинки с результатами —
 обычные сохранённые файлы отчёта, которые можно открыть отдельно.
+
+## Модернизация V2
+
+Добавлены потоковые данные и численная валидация, раздельные метрики RSS/CUDA
+allocated/reserved, ограниченный поиск цепочек, независимые парные запуски и
+экспорт с настоящей повторной загрузкой. Одиночное ускорение не заменяет baseline:
+нужны минимум три пары с улучшением в каждой. Неоднозначный результат получает
+статус `INCONCLUSIVE`.
+
+Проверено локально: 127 тестов; RAM всего эксперимента ResNet50 снизился на 8,83%
+на CPU и 4,60% в CUDA-сценарии, ответы на 200 размеченных изображениях сохранены.
+Это память процесса в RAM; снижение расхода VRAM этим сравнением не установлено.
+GPU-тайминги нестабильны: ускорение steady-state не подтверждено. В отдельном
+синтетическом CPU-тесте ResNet18 цепочка ONNX дала медиану ускорения 2,53×
+в трёх независимых парах с проверкой численной корректности и дрейфа.
+Последующий пользовательский запуск дал 2,45× по трём отдельным парам и успешно
+проверенный экспорт. Его результаты сохранены [отдельно](docs/experiments/manual-demo-20261108.json).
+
+[Подробное сравнение с предыдущей версией](docs/MIGRATION_V2.ru.md) содержит схемы
+старого и нового пути, объяснения всех изменённых модулей, результаты и цену
+дополнительных проверок. ONNX уже существовал: обновление улучшает управление
+памятью и надёжность выбора, а не обещает универсальное ускорение любой модели.
+
+```bash
+python -m pip install -e ".[onnx,memory,dev]"
+python -m kernelixx profile-memory --model resnet18 --device cuda
+python -m kernelixx optimize-pipeline --model resnet18 --device cpu --pipelines onnx onnx+quantization --trials 3 --output results/pipeline
+python -m kernelixx benchmark-repeat --model resnet18 --device cuda --pipeline fp16 --trials 3
+python -m kernelixx optimize-llm --model-file model.gguf --threads 1 4 --prompt-format auto --n-batch 256 --n-ubatch 64 --validate-logits
+python -m kernelixx export --run-dir results/pipeline/latest --output results/exported-model
+```
+
+У каждой команды есть `--help`. Старые команды сохранены. Для больших наборов
+подходят NPZ или каталог с `inputs.npy` (float32) и `labels.npy` (int64).
+Размер batch задаёт `--input-shape`, численных блоков — `--validation-chunk-elements`.
+Порядок данных и последний неполный batch сохраняются. Нужен запас временного диска.
+
+RSS — память всего процесса; sampling может пропустить короткий пик. CUDA
+allocated/reserved и полный VRAM процесса — разные величины. Недоступные
+источники возвращают `null`.
+
+GGUF использует шаблон из метаданных, отдельно измеряет prompt processing и
+decode, проверяет prompt-logits и задания с `expected_exact`. Локальная сборка
+llama.cpp поддерживает CPU: GPU offload остаётся `NOT VERIFIED`. Совпадение
+токенов не доказывает качество ответов. Форматы KV-cache требуют реальной
+проверки с выбранной моделью и backend.
+
+[Аудит](docs/INITIAL_TECHNICAL_AUDIT.md) · [Архитектура V2](docs/ARCHITECTURE_V2.md) ·
+[Память](docs/MEMORY_PROFILING.md) · [Методика](docs/BENCHMARK_METHODOLOGY.md) ·
+[Результаты и ограничения](docs/PERFORMANCE_RESULTS.md).
+
+Предоставленный позже `GPU-KERNEL.zip` использован как референс SoupLite.
+Из него не переносились веб-приложение и тренировочные kernels. Добавлена
+точечная защита экспорта от изменения кода модели при прежних весах.
+[Разбор архива и применимости](docs/SOUPLITE_REFERENCE_AUDIT.md).
 
 ## Что уже работает
 

@@ -1,5 +1,11 @@
 # Local validation evidence
 
+**Current architecture update, 2026-11-08:** the full local suite has 127 passing
+tests, including real CUDA/ORT/local-GGUF checks. See the
+[before/after guide](MIGRATION_V2.ru.md), [current results](PERFORMANCE_RESULTS.md)
+and [publication test log](test-results-publication-v2.txt). Counts and measurements
+below retain their historical 2026-11-04 scope rather than describing the new run.
+
 **Update, 2026-11-04:** Kernelixx has **90 tests**, covering the optional GGUF CPU extension,
 GPU inference, AMP training, real-image preparation, accuracy-limit checks,
 batch-equivalence probes and repeated-study aggregation/read mode.
